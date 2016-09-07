@@ -10,12 +10,14 @@ package lenguajenatural;
  * Interfaz Principal del Proyecto
  * @author basu
  */
-public class Principal extends javax.swing.JFrame {
+public class Principal extends javax.swing.JFrame 
+{
 
     /**
      * Creates new form Principal
      */
-    public Principal() {
+    public Principal() 
+    {
         initComponents();
     }
 
@@ -38,6 +40,11 @@ public class Principal extends javax.swing.JFrame {
         jLabel1.setText("Sistema de Voz en Lenguaje Natural Basado en Ontologias");
 
         btnIniciar.setText("Iniciar");
+        btnIniciar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnIniciarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -82,10 +89,17 @@ public class Principal extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnIniciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciarActionPerformed
+        Chat c = new Chat();
+        this.hide();
+        c.show();
+    }//GEN-LAST:event_btnIniciarActionPerformed
+
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
+    public static void main(String args[])
+    {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
