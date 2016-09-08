@@ -6,7 +6,10 @@
 
 package lenguajenatural;
 
+import java.io.IOException;
 import java.util.Calendar;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -47,18 +50,6 @@ public class Chat extends javax.swing.JFrame {
         jTextArea1.setEditable(false);
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
-        jTextArea1.addInputMethodListener(new java.awt.event.InputMethodListener() {
-            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
-                jTextArea1CaretPositionChanged(evt);
-            }
-            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
-            }
-        });
-        jTextArea1.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
-            public void propertyChange(java.beans.PropertyChangeEvent evt) {
-                jTextArea1PropertyChange(evt);
-            }
-        });
         jScrollPane1.setViewportView(jTextArea1);
 
         jButton1.setText("Enviar");
@@ -69,6 +60,11 @@ public class Chat extends javax.swing.JFrame {
         });
 
         jButton2.setText("Guardar chat");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton3.setText("Volver al menú");
 
@@ -125,51 +121,50 @@ public class Chat extends javax.swing.JFrame {
     private void jTextArea2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextArea2KeyPressed
         // TODO add your handling code here:
         int key = evt.getKeyCode();
-        int hour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY);
-        int min = Calendar.getInstance().get(Calendar.MINUTE);
-        int sec = Calendar.getInstance().get(Calendar.SECOND);
-        
-        if(key == java.awt.event.KeyEvent.VK_ENTER) {
-            jTextArea1.append(
-                    "[" + hour + ":" + min + ":" + sec + "] "
-                            +jTextArea2.getText() + "\n");            
-        }
-        
-            
+                
+        if(key == java.awt.event.KeyEvent.VK_ENTER)
+            this.addString();           
     }//GEN-LAST:event_jTextArea2KeyPressed
-
-    private void jTextArea1CaretPositionChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_jTextArea1CaretPositionChanged
-        // TODO add your handling code here:
-       
-        
-    }//GEN-LAST:event_jTextArea1CaretPositionChanged
-
-    private void jTextArea1PropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jTextArea1PropertyChange
-        // TODO add your handling code here:
-        
-    }//GEN-LAST:event_jTextArea1PropertyChange
 
     private void jTextArea2KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextArea2KeyReleased
         // TODO add your handling code here:
          int key = evt.getKeyCode();
          
-         if(key == java.awt.event.KeyEvent.VK_ENTER) {
+         if(key == java.awt.event.KeyEvent.VK_ENTER)
              jTextArea2.setText(null);
-         }
     }//GEN-LAST:event_jTextArea2KeyReleased
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+    private void addString() {
         int hour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY);
         int min = Calendar.getInstance().get(Calendar.MINUTE);
         int sec = Calendar.getInstance().get(Calendar.SECOND);
         
         jTextArea1.append(
-                "[" + hour + ":" + min + ":" + sec + "] " 
-                        +jTextArea2.getText() + "\n");
+                    "[" + hour + ":" + min + ":" + sec + "] "
+                            +jTextArea2.getText() + "\n"); 
         jTextArea2.setText(null);
-        jTextArea2.setFocusable(true);
+    }
+    
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        this.addString();
+        
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        javax.swing.JFileChooser fileChooser = new javax.swing.JFileChooser();
+        if (fileChooser.showSaveDialog(null) == javax.swing.JFileChooser.APPROVE_OPTION) {
+            java.io.File file = fileChooser.getSelectedFile();
+            try {
+                try (java.io.FileWriter fileWriter = new java.io.FileWriter(file)) {
+                    fileWriter.write(jTextArea1.getText());
+                }
+            } catch (IOException ex) {
+                Logger.getLogger(Chat.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
