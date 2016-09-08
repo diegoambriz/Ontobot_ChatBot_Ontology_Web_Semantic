@@ -44,6 +44,7 @@ public class Chat extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jTextArea1.setEditable(false);
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
         jTextArea1.addInputMethodListener(new java.awt.event.InputMethodListener() {
@@ -61,6 +62,11 @@ public class Chat extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jTextArea1);
 
         jButton1.setText("Enviar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("Guardar chat");
 
@@ -71,6 +77,9 @@ public class Chat extends javax.swing.JFrame {
         jTextArea2.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 jTextArea2KeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextArea2KeyReleased(evt);
             }
         });
         jScrollPane2.setViewportView(jTextArea2);
@@ -116,15 +125,14 @@ public class Chat extends javax.swing.JFrame {
     private void jTextArea2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextArea2KeyPressed
         // TODO add your handling code here:
         int key = evt.getKeyCode();
+        int hour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY);
+        int min = Calendar.getInstance().get(Calendar.MINUTE);
+        int sec = Calendar.getInstance().get(Calendar.SECOND);
         
         if(key == java.awt.event.KeyEvent.VK_ENTER) {
             jTextArea1.append(
-                    "\n[" + Calendar.getInstance().get(Calendar.HOUR) + 
-                            ":" + Calendar.getInstance().get(Calendar.MINUTE) + 
-                            ":" + Calendar.getInstance().get(Calendar.SECOND) +
-                            "] " +jTextArea2.getText());
-            jTextArea2.setText(null);
-            jTextArea2.remove(jTextArea2.getText().length());            
+                    "[" + hour + ":" + min + ":" + sec + "] "
+                            +jTextArea2.getText() + "\n");            
         }
         
             
@@ -132,7 +140,7 @@ public class Chat extends javax.swing.JFrame {
 
     private void jTextArea1CaretPositionChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_jTextArea1CaretPositionChanged
         // TODO add your handling code here:
-        
+       
         
     }//GEN-LAST:event_jTextArea1CaretPositionChanged
 
@@ -140,6 +148,28 @@ public class Chat extends javax.swing.JFrame {
         // TODO add your handling code here:
         
     }//GEN-LAST:event_jTextArea1PropertyChange
+
+    private void jTextArea2KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextArea2KeyReleased
+        // TODO add your handling code here:
+         int key = evt.getKeyCode();
+         
+         if(key == java.awt.event.KeyEvent.VK_ENTER) {
+             jTextArea2.setText(null);
+         }
+    }//GEN-LAST:event_jTextArea2KeyReleased
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        int hour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY);
+        int min = Calendar.getInstance().get(Calendar.MINUTE);
+        int sec = Calendar.getInstance().get(Calendar.SECOND);
+        
+        jTextArea1.append(
+                "[" + hour + ":" + min + ":" + sec + "] " 
+                        +jTextArea2.getText() + "\n");
+        jTextArea2.setText(null);
+        jTextArea2.setFocusable(true);
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
