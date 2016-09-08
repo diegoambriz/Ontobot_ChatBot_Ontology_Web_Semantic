@@ -91,8 +91,8 @@ public class Principal extends javax.swing.JFrame
 
     private void btnIniciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciarActionPerformed
         Chat c = new Chat();
-        this.hide();
-        c.show();
+        this.setVisible(false);
+        c.setVisible(true);
     }//GEN-LAST:event_btnIniciarActionPerformed
 
     /**
