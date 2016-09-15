@@ -203,14 +203,9 @@ public class Chat extends javax.swing.JFrame {
         int sec = Calendar.getInstance().get(Calendar.SECOND);
         String entrada;
         
-        
-        /*txtChat.append(
-                    "[" + hour + ":" + min + ":" + sec + "] "
-                            +jTextArea2.getText() + "\n");*/
         entrada = "[U" + hour + ":" + min + ":" + sec + "] "
                             +jTextArea2.getText() + "\n";
-        //jTextPane1.
-        /**/
+        
         StyledDocument doc = jTextPane1.getStyledDocument();
         int length = doc.getLength();
             
@@ -219,23 +214,12 @@ public class Chat extends javax.swing.JFrame {
         StyleConstants.setBold(attrs, true);
         StyleConstants.setAlignment(attrs, StyleConstants.ALIGN_LEFT);
         StyleConstants.setFontSize(attrs, fontSize);
-        
-        
-        //StyleConstants.setFontSize(attrs, sec); //cambia tamño de fuente
+                
         doc.insertString(doc.getLength(), entrada, null);
         doc.setParagraphAttributes(length+1, 1, attrs, false);
         
-        
-        
-        
-        
         this.GeneraRespuesta();
-        /*jTextPane1.getStyledDocument().insertString(jTextPane1.getStyledDocument().getLength(), entrada, attrs);
-        jTextPane1.getStyledDocument().setParagraphAttributes(jTextPane1.getStyledDocument().getLength(), 0, attrs, false);
         
-        jTextPane1.getStyledDocument().insertString(jTextPane1.getStyledDocument().getLength(), respuesta, attrsResp);
-        jTextPane1.getStyledDocument().setParagraphAttributes(jTextPane1.getStyledDocument().getLength(), 0, attrsResp, false);*/
-        /**/
         jTextArea2.setText(null);
     }
     
@@ -275,7 +259,6 @@ public class Chat extends javax.swing.JFrame {
             java.io.File file = fileChooser.getSelectedFile();
             try {
                 try (java.io.FileWriter fileWriter = new java.io.FileWriter(file)) {
-                    //fileWriter.write(txtChat.getText());
                     fileWriter.write(jTextPane1.getText());
                 }
             } catch (IOException ex) {
@@ -301,7 +284,6 @@ public class Chat extends javax.swing.JFrame {
         int respuesta = JOptionPane.showConfirmDialog(null, mensaje, titulo, JOptionPane.YES_NO_OPTION);
         if (respuesta == JOptionPane.YES_OPTION)
         {
-            //txtChat.setText("");
             jTextPane1.setText("");
         }
         
@@ -311,13 +293,10 @@ public class Chat extends javax.swing.JFrame {
         // TODO add your handling code here:
         fontSize = (int)jSpinner1.getValue();
         StyledDocument doc = jTextPane1.getStyledDocument();
-        //int length = doc.getLength();
         SimpleAttributeSet attrs = new SimpleAttributeSet();
         int length = doc.getLength();
         StyleConstants.setFontSize(attrs, fontSize);
-        //StyleConstants.setBold(attrsResp, false);
-        //StyleConstants.setAlignment(attrsResp, StyleConstants.ALIGN_RIGHT);
-        //doc.insertString(doc.getLength(), respuesta, null);
+        
         doc.setParagraphAttributes(0, length, attrs, false);
     }//GEN-LAST:event_jSpinner1StateChanged
 
