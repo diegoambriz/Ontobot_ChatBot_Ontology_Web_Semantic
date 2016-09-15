@@ -196,7 +196,7 @@ public class Chat extends javax.swing.JFrame {
          int key = evt.getKeyCode();
          
          if(key == java.awt.event.KeyEvent.VK_ENTER)
-             jTextArea2.setText(null);
+             jTextArea2.setText(null); 
     }//GEN-LAST:event_jTextArea2KeyReleased
 
     private void addString() throws BadLocationException {

@@ -36,10 +36,8 @@
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Component id="btnVolver" max="32767" attributes="0"/>
-                      <Component id="btnGuardar" max="32767" attributes="0"/>
-                  </Group>
+                  <Component id="btnVolver" max="32767" attributes="0"/>
+                  <Component id="btnGuardar" max="32767" attributes="0"/>
                   <Group type="102" attributes="0">
                       <Component id="sldVolumen" min="-2" pref="114" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
