@@ -257,16 +257,39 @@ public class Chat extends javax.swing.JFrame {
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         // TODO add your handling code here:
         javax.swing.JFileChooser fileChooser = new javax.swing.JFileChooser();
-        if (fileChooser.showSaveDialog(null) == javax.swing.JFileChooser.APPROVE_OPTION) {
-            java.io.File file = fileChooser.getSelectedFile();
-            try {
-                try (java.io.FileWriter fileWriter = new java.io.FileWriter(file)) {
-                    fileWriter.write(jTextPane1.getText());
+        
+        String[] opciones = {"Completo", "Parcial", "Cancelar" };
+ 
+        int opcion = JOptionPane.showOptionDialog(
+                               null                             //componente
+                             , "¿Cómo desea guardar la conversación?"            // Mensaje
+                             , "Guardar conversación"         // Titulo en la barra del cuadro
+                             , JOptionPane.DEFAULT_OPTION       // Tipo de opciones
+                             , JOptionPane.INFORMATION_MESSAGE  // Tipo de mensaje (icono)
+                             , null                             // Icono (ninguno)
+                             , opciones                         // Opciones personalizadas
+                             , null                             // Opcion por defecto
+                           );
+        switch(opcion) {
+            case 0:
+                if (fileChooser.showSaveDialog(null) == javax.swing.JFileChooser.APPROVE_OPTION) {
+                    java.io.File file = fileChooser.getSelectedFile();
+                    try {
+                        try (java.io.FileWriter fileWriter = new java.io.FileWriter(file)) {
+                            fileWriter.write(jTextPane1.getText());
+                        }
+                    } catch (IOException ex) {
+                        Logger.getLogger(Chat.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                 }
-            } catch (IOException ex) {
-                Logger.getLogger(Chat.class.getName()).log(Level.SEVERE, null, ex);
-            }
+                break;
+            case 1:
+                break;
+            case 2:
+                break;
         }
+        
+        
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
