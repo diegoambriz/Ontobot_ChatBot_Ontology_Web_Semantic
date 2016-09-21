@@ -10,10 +10,14 @@ package lenguajenatural;
 
 import java.io.IOException;
 import java.util.Calendar;
+import java.util.StringTokenizer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JCheckBox;
+import javax.swing.JTextPane;
 import javax.swing.JOptionPane;
 import javax.swing.text.BadLocationException;
+import javax.swing.text.Document;
 import javax.swing.text.StyleConstants;
 import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyledDocument;
@@ -47,6 +51,11 @@ public class Chat extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jDialog1 = new javax.swing.JDialog();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTextPane2 = new javax.swing.JTextPane();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
         btnEnviar = new javax.swing.JButton();
         btnGuardar = new javax.swing.JButton();
         btnVolver = new javax.swing.JButton();
@@ -59,6 +68,39 @@ public class Chat extends javax.swing.JFrame {
         jTextPane1 = new javax.swing.JTextPane();
         jSpinner1 = new javax.swing.JSpinner();
         jLabel1 = new javax.swing.JLabel();
+
+        jScrollPane1.setViewportView(jTextPane2);
+
+        jButton1.setText("Guardar");
+
+        jButton2.setText("Cancelar");
+
+        javax.swing.GroupLayout jDialog1Layout = new javax.swing.GroupLayout(jDialog1.getContentPane());
+        jDialog1.getContentPane().setLayout(jDialog1Layout);
+        jDialog1Layout.setHorizontalGroup(
+            jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jDialog1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 399, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addGroup(jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        jDialog1Layout.setVerticalGroup(
+            jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jDialog1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1)
+                    .addGroup(jDialog1Layout.createSequentialGroup()
+                        .addComponent(jButton1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton2)
+                        .addGap(0, 243, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -131,9 +173,8 @@ public class Chat extends javax.swing.JFrame {
                     .addComponent(jScrollPane3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(btnVolver, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnGuardar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnVolver, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnGuardar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(sldVolumen, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -284,7 +325,16 @@ public class Chat extends javax.swing.JFrame {
                 }
                 break;
             case 1:
-                break;
+                GuardaParcial parcial = new GuardaParcial();
+                try {
+                    parcial.setHistorial(jTextPane1.getText());
+                } catch (BadLocationException ex) {
+                    Logger.getLogger(Chat.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                parcial.setVisible(true);
+                String text = parcial.getHistorial();
+                
+                
             case 2:
                 break;
         }
@@ -365,12 +415,17 @@ public class Chat extends javax.swing.JFrame {
     private javax.swing.JButton btnEnviar;
     private javax.swing.JButton btnGuardar;
     private javax.swing.JButton btnVolver;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JDialog jDialog1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JSpinner jSpinner1;
     private javax.swing.JTextArea jTextArea2;
     private javax.swing.JTextPane jTextPane1;
+    private javax.swing.JTextPane jTextPane2;
     private javax.swing.JLabel lblVolumen;
     private javax.swing.JSlider sldVolumen;
     // End of variables declaration//GEN-END:variables
