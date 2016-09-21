@@ -35,10 +35,10 @@ public class Chat extends javax.swing.JFrame {
     
     public Chat() {
         initComponents();
-        jTextArea2.setRows(2);
-        jTextArea2.setColumns(10);
-        jTextArea2.setLineWrap(true);
-        jTextArea2.setWrapStyleWord(true);
+        txtMsg.setRows(2);
+        txtMsg.setColumns(10);
+        txtMsg.setLineWrap(true);
+        txtMsg.setWrapStyleWord(true);
         fontSize = 13;
     }
 
@@ -60,12 +60,12 @@ public class Chat extends javax.swing.JFrame {
         btnGuardar = new javax.swing.JButton();
         btnVolver = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTextArea2 = new javax.swing.JTextArea();
+        txtMsg = new javax.swing.JTextArea();
         sldVolumen = new javax.swing.JSlider();
         lblVolumen = new javax.swing.JLabel();
         btnBorrar = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTextPane1 = new javax.swing.JTextPane();
+        txtChat = new javax.swing.JTextPane();
         jSpinner1 = new javax.swing.JSpinner();
         jLabel1 = new javax.swing.JLabel();
 
@@ -125,17 +125,17 @@ public class Chat extends javax.swing.JFrame {
             }
         });
 
-        jTextArea2.setColumns(20);
-        jTextArea2.setRows(5);
-        jTextArea2.addKeyListener(new java.awt.event.KeyAdapter() {
+        txtMsg.setColumns(20);
+        txtMsg.setRows(5);
+        txtMsg.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
-                jTextArea2KeyPressed(evt);
+                txtMsgKeyPressed(evt);
             }
             public void keyReleased(java.awt.event.KeyEvent evt) {
-                jTextArea2KeyReleased(evt);
+                txtMsgKeyReleased(evt);
             }
         });
-        jScrollPane2.setViewportView(jTextArea2);
+        jScrollPane2.setViewportView(txtMsg);
 
         lblVolumen.setText("Volumen");
 
@@ -146,8 +146,8 @@ public class Chat extends javax.swing.JFrame {
             }
         });
 
-        jTextPane1.setEditable(false);
-        jScrollPane3.setViewportView(jTextPane1);
+        txtChat.setEditable(false);
+        jScrollPane3.setViewportView(txtChat);
 
         jSpinner1.setModel(new javax.swing.SpinnerNumberModel(13, 5, 20, 1));
         jSpinner1.addChangeListener(new javax.swing.event.ChangeListener() {
@@ -220,7 +220,7 @@ public class Chat extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextArea2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextArea2KeyPressed
+    private void txtMsgKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtMsgKeyPressed
         // TODO add your handling code here:
         int key = evt.getKeyCode();
                 
@@ -230,15 +230,15 @@ public class Chat extends javax.swing.JFrame {
         } catch (BadLocationException ex) {
             Logger.getLogger(Chat.class.getName()).log(Level.SEVERE, null, ex);
         }           
-    }//GEN-LAST:event_jTextArea2KeyPressed
+    }//GEN-LAST:event_txtMsgKeyPressed
 
-    private void jTextArea2KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextArea2KeyReleased
+    private void txtMsgKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtMsgKeyReleased
         // TODO add your handling code here:
          int key = evt.getKeyCode();
          
          if(key == java.awt.event.KeyEvent.VK_ENTER)
-             jTextArea2.setText(null); 
-    }//GEN-LAST:event_jTextArea2KeyReleased
+             txtMsg.setText(null); 
+    }//GEN-LAST:event_txtMsgKeyReleased
 
     private void addString() throws BadLocationException {
         int hour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY);
@@ -247,9 +247,9 @@ public class Chat extends javax.swing.JFrame {
         String entrada;
         
         entrada = "[U" + hour + ":" + min + ":" + sec + "] "
-                            +jTextArea2.getText() + "\n";
+                            +txtMsg.getText() + "\n";
         
-        StyledDocument doc = jTextPane1.getStyledDocument();
+        StyledDocument doc = txtChat.getStyledDocument();
         int length = doc.getLength();
             
         SimpleAttributeSet attrs = new SimpleAttributeSet();
@@ -263,7 +263,7 @@ public class Chat extends javax.swing.JFrame {
         
         this.GeneraRespuesta();
         
-        jTextArea2.setText(null);
+        txtMsg.setText(null);
     }
     
     private void GeneraRespuesta() throws BadLocationException {
@@ -275,7 +275,7 @@ public class Chat extends javax.swing.JFrame {
         respuesta = "[S" + hour + ":" + min + ":" + sec + "] "
                             + "Respuesta generada por el sistema (temp)" + "\n";
         
-        StyledDocument doc = jTextPane1.getStyledDocument();
+        StyledDocument doc = txtChat.getStyledDocument();
         int length = doc.getLength();
         SimpleAttributeSet attrsResp = new SimpleAttributeSet();
         StyleConstants.setBold(attrsResp, false);
@@ -317,7 +317,7 @@ public class Chat extends javax.swing.JFrame {
                     java.io.File file = fileChooser.getSelectedFile();
                     try {
                         try (java.io.FileWriter fileWriter = new java.io.FileWriter(file)) {
-                            fileWriter.write(jTextPane1.getText());
+                            fileWriter.write(txtChat.getText());
                         }
                     } catch (IOException ex) {
                         Logger.getLogger(Chat.class.getName()).log(Level.SEVERE, null, ex);
@@ -327,39 +327,49 @@ public class Chat extends javax.swing.JFrame {
             case 1:
                 GuardaParcial parcial = new GuardaParcial();
                 try {
-                    parcial.setHistorial(jTextPane1.getText());
+                    parcial.setHistorial(txtChat.getText());
                 } catch (BadLocationException ex) {
                     Logger.getLogger(Chat.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 parcial.setVisible(true);
                 String text = parcial.getHistorial();
-                
-                
             case 2:
                 break;
         }
-        
-        
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
-        Principal p = new Principal();
-        //this.hide(); <- método obsoleto :P
-        this.setVisible(false);
-        //p.show(); <- método obsoleto :P
-        p.setVisible(true);
         
+        if(txtChat.getText().length()!= 0)
+        {
+            String mensaje = "Estas seguro que deseas volver al menu Principal";
+            String titulo = "Volver al menu Principal";
+      
+            int respuesta = JOptionPane.showConfirmDialog(null, mensaje, titulo, JOptionPane.YES_NO_OPTION);
+            if (respuesta == JOptionPane.YES_OPTION)
+            {
+                Principal p = new Principal();
+                this.setVisible(false);
+                p.setVisible(true);
+            }
+        }
+        else
+        {
+            Principal p = new Principal();
+            this.setVisible(false);
+            p.setVisible(true);
+        }
     }//GEN-LAST:event_btnVolverActionPerformed
 
     private void btnBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBorrarActionPerformed
         
         String mensaje = "Estas seguro que deseas Borrar el Historial de Conversacion?";
         String titulo = "Borrar Historial";
-      
         int respuesta = JOptionPane.showConfirmDialog(null, mensaje, titulo, JOptionPane.YES_NO_OPTION);
+        
         if (respuesta == JOptionPane.YES_OPTION)
         {
-            jTextPane1.setText("");
+            txtChat.setText("");
         }
         
     }//GEN-LAST:event_btnBorrarActionPerformed
@@ -367,7 +377,7 @@ public class Chat extends javax.swing.JFrame {
     private void jSpinner1StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSpinner1StateChanged
         // TODO add your handling code here:
         fontSize = (int)jSpinner1.getValue();
-        StyledDocument doc = jTextPane1.getStyledDocument();
+        StyledDocument doc = txtChat.getStyledDocument();
         SimpleAttributeSet attrs = new SimpleAttributeSet();
         int length = doc.getLength();
         StyleConstants.setFontSize(attrs, fontSize);
@@ -423,10 +433,10 @@ public class Chat extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JSpinner jSpinner1;
-    private javax.swing.JTextArea jTextArea2;
-    private javax.swing.JTextPane jTextPane1;
     private javax.swing.JTextPane jTextPane2;
     private javax.swing.JLabel lblVolumen;
     private javax.swing.JSlider sldVolumen;
+    private javax.swing.JTextPane txtChat;
+    private javax.swing.JTextArea txtMsg;
     // End of variables declaration//GEN-END:variables
 }

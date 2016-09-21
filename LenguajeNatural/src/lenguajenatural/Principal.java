@@ -6,16 +6,15 @@
 
 package lenguajenatural;
 
+import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileNameExtensionFilter;
+
 /**
  * Interfaz Principal del Proyecto
  * @author basu
  */
 public class Principal extends javax.swing.JFrame 
 {
-
-    /**
-     * Creates new form Principal
-     */
     public Principal() 
     {
         initComponents(); 
@@ -91,7 +90,12 @@ public class Principal extends javax.swing.JFrame
 
         jMenu2.setText("Administrador");
 
-        jMenuItem1.setText("Opcion 1");
+        jMenuItem1.setText("Cargar Ontologias");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
         jMenu2.add(jMenuItem1);
 
         jMenuItem3.setText("Opcion 2");
@@ -137,6 +141,20 @@ public class Principal extends javax.swing.JFrame
         // TODO add your handling code here:
         System.exit(0);
     }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        
+        JFileChooser chooser = new JFileChooser();
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("Ontology Files", "xml", "html");
+        chooser.setFileFilter(filter);
+        
+        int returnVal = chooser.showOpenDialog(jMenu2);
+        if(returnVal == JFileChooser.APPROVE_OPTION)
+        {
+            System.out.println("Ontologia Seleccionada: " +
+            chooser.getSelectedFile().getName());
+        }
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     /**
      * @param args the command line arguments
