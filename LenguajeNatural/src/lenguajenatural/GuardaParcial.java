@@ -16,6 +16,11 @@ import javax.swing.text.BadLocationException;
 import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyledDocument;
 import javax.swing.JCheckBox;
+import javax.swing.text.AbstractDocument;
+import javax.swing.text.AttributeSet;
+import javax.swing.text.Element;
+import javax.swing.text.ElementIterator;
+import javax.swing.text.StyleConstants;
 
 /**
  *
@@ -118,14 +123,21 @@ public class GuardaParcial extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        Component[] listComp = jTextPane1.getComponents();
-        for(int index = 0; index < listComp.length-1; index++) {
-            if (listComp[index] instanceof JCheckBox) {
-                JCheckBox chk = (JCheckBox) listComp[index];
-                if(chk.isSelected())
-                    historial = chk.getText();
-            }            
+        StyledDocument doc = (StyledDocument) jTextPane1.getDocument();
+        ElementIterator iterator = new ElementIterator(doc);
+        Element element;
+        while ((element = iterator.next()) != null) {
+            AttributeSet as = element.getAttributes();
+            if (as.containsAttribute(AbstractDocument.ElementNameAttribute, StyleConstants.ComponentElementName)) {
+                if(StyleConstants.getComponent(as) instanceof JCheckBox) {
+                    //System.out.println("HOLAAAAAAAA");
+                    JCheckBox chk = (JCheckBox) StyleConstants.getComponent(as);
+                    if(chk.isSelected())
+                        historial += (chk.getText() + "\n");
+                }
+            }
         }
+
         this.SaveFile();
     }//GEN-LAST:event_jButton1ActionPerformed
     
