@@ -102,7 +102,12 @@ public class Chat extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         btnEnviar.setText("Enviar");
         btnEnviar.addActionListener(new java.awt.event.ActionListener() {
@@ -221,12 +226,18 @@ public class Chat extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtMsgKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtMsgKeyPressed
-        // TODO add your handling code here:
         int key = evt.getKeyCode();
                 
         if(key == java.awt.event.KeyEvent.VK_ENTER)
             try {
-                this.addString();
+                    if(txtMsg.getText().length()!=0)
+                {
+                    this.addString();
+                }
+                else
+                {
+                    JOptionPane.showMessageDialog(null, "No se puede enviar un Mensaje Vacio");
+                }
         } catch (BadLocationException ex) {
             Logger.getLogger(Chat.class.getName()).log(Level.SEVERE, null, ex);
         }           
@@ -286,10 +297,19 @@ public class Chat extends javax.swing.JFrame {
     }
     
     private void btnEnviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnviarActionPerformed
-        try {
-            // TODO add your handling code here:
-            this.addString();
-        } catch (BadLocationException ex) {
+        try
+        {
+            if(txtMsg.getText().length()!=0)
+            {
+                this.addString();
+            }
+            else
+            {
+                JOptionPane.showMessageDialog(null, "No se puede enviar un Mensaje Vacio");
+            }
+        } 
+        catch (BadLocationException ex)
+        {
             Logger.getLogger(Chat.class.getName()).log(Level.SEVERE, null, ex);
         }
         
@@ -384,6 +404,28 @@ public class Chat extends javax.swing.JFrame {
         
         doc.setParagraphAttributes(0, length, attrs, false);
     }//GEN-LAST:event_jSpinner1StateChanged
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        if(txtChat.getText().length()!= 0)
+        {
+            String mensaje = "Estas seguro que desea Salir";
+            String titulo = "Volver al menu Principal";
+      
+            int respuesta = JOptionPane.showConfirmDialog(null, mensaje, titulo, JOptionPane.YES_NO_OPTION);
+            if (respuesta == JOptionPane.YES_OPTION)
+            {
+                Principal p = new Principal();
+                this.setVisible(false);
+                p.setVisible(true);
+            }
+        }
+        else
+        {
+            Principal p = new Principal();
+            this.setVisible(false);
+            p.setVisible(true);
+        }
+    }//GEN-LAST:event_formWindowClosing
 
     /**
      * @param args the command line arguments
