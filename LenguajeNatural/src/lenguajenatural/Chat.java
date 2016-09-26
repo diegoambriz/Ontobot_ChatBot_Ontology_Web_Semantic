@@ -409,7 +409,7 @@ public class Chat extends javax.swing.JFrame {
         if(txtChat.getText().length()!= 0)
         {
             String mensaje = "Estas seguro que desea Salir";
-            String titulo = "Volver al menu Principal";
+            String titulo = "Volver al menu Principal"; 
       
             int respuesta = JOptionPane.showConfirmDialog(null, mensaje, titulo, JOptionPane.YES_NO_OPTION);
             if (respuesta == JOptionPane.YES_OPTION)
