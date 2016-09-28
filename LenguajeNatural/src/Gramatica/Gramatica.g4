@@ -18,6 +18,6 @@ N	:	'hombre'|'amigos'|'cafe'|'leche' //implementar un diccionario
 	;
 V 	:	'toma' | 'toman' //implementar un diccionario
 	;
-P 	:	'con'|'solo' //implementar un diccionario
+P 	:	'con'//implementar un diccionario
 	;
 WS : [ \t\r\n]+ -> skip ;
