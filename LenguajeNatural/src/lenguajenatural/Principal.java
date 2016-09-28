@@ -6,7 +6,9 @@
 
 package lenguajenatural;
 
+import java.io.File;
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
@@ -145,15 +147,14 @@ public class Principal extends javax.swing.JFrame
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         
         JFileChooser chooser = new JFileChooser();
-        
-        
-        FileNameExtensionFilter filter = new FileNameExtensionFilter("Ontology Files", "xml", "html");
+        chooser.setCurrentDirectory(new File("./Ontologias"));
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("Ontology Files", "xml", "html","owl");
         chooser.setFileFilter(filter);
         
         int returnVal = chooser.showOpenDialog(jMenu2);
         if(returnVal == JFileChooser.APPROVE_OPTION)
         {
-            System.out.println("Ontologia Seleccionada: " +
+            JOptionPane.showMessageDialog(null,"Se cargo el archivo : " +
             chooser.getSelectedFile().getName());
         }
     }//GEN-LAST:event_jMenuItem1ActionPerformed
