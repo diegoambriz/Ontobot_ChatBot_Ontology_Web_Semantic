@@ -145,6 +145,8 @@ public class Principal extends javax.swing.JFrame
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         
         JFileChooser chooser = new JFileChooser();
+        
+        
         FileNameExtensionFilter filter = new FileNameExtensionFilter("Ontology Files", "xml", "html");
         chooser.setFileFilter(filter);
         
