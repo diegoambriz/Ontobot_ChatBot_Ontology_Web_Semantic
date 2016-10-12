@@ -317,7 +317,7 @@ public class Chat extends javax.swing.JFrame {
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         // TODO add your handling code here:
-        if(txtMsg.getText().length()!=0)
+        if(txtChat.getText().length()!=0)
         {
             javax.swing.JFileChooser fileChooser = new javax.swing.JFileChooser();
         
