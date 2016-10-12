@@ -34,16 +34,20 @@ public class Principal extends javax.swing.JFrame
         jPanel1 = new javax.swing.JPanel();
         lblTitulo = new javax.swing.JLabel();
         btnIniciar = new javax.swing.JButton();
-        jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
+        menuPrincipal = new javax.swing.JMenuBar();
+        menuArchivo = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
+        menuAdmin = new javax.swing.JMenu();
+        menuOntologia = new javax.swing.JMenu();
+        cargaOntologia = new javax.swing.JMenuItem();
+        jSeparator2 = new javax.swing.JPopupMenu.Separator();
+        menuDominio = new javax.swing.JMenuItem();
+        jSeparator1 = new javax.swing.JPopupMenu.Separator();
+        cargarGramatica = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
-        jMenu4 = new javax.swing.JMenu();
-        jMenuItem6 = new javax.swing.JMenuItem();
-        jMenuItem7 = new javax.swing.JMenuItem();
-        jMenuItem4 = new javax.swing.JMenuItem();
-        jMenu3 = new javax.swing.JMenu();
+        jSeparator3 = new javax.swing.JPopupMenu.Separator();
+        editarGramatica = new javax.swing.JMenuItem();
+        menuAbout = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -80,7 +84,7 @@ public class Principal extends javax.swing.JFrame
                 .addGap(38, 38, 38))
         );
 
-        jMenu1.setText("Archivo");
+        menuArchivo.setText("Archivo");
 
         jMenuItem2.setText("Salir");
         jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
@@ -88,39 +92,51 @@ public class Principal extends javax.swing.JFrame
                 jMenuItem2ActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem2);
+        menuArchivo.add(jMenuItem2);
 
-        jMenuBar1.add(jMenu1);
+        menuPrincipal.add(menuArchivo);
 
-        jMenu2.setText("Administrador");
+        menuAdmin.setText("Administrador");
 
-        jMenuItem1.setText("Cargar Ontologias");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+        menuOntologia.setText("Ontología");
+
+        cargaOntologia.setText("Cargar Ontología");
+        cargaOntologia.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
+                cargaOntologiaActionPerformed(evt);
             }
         });
-        jMenu2.add(jMenuItem1);
+        menuOntologia.add(cargaOntologia);
 
-        jMenu4.setText("Gramática");
+        menuAdmin.add(menuOntologia);
+        menuAdmin.add(jSeparator2);
 
-        jMenuItem6.setText("Editar Gramática");
-        jMenu4.add(jMenuItem6);
+        menuDominio.setText("Dominio");
+        menuDominio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuDominioActionPerformed(evt);
+            }
+        });
+        menuAdmin.add(menuDominio);
+        menuAdmin.add(jSeparator1);
 
-        jMenuItem7.setText("Cargar Gramática");
-        jMenu4.add(jMenuItem7);
+        cargarGramatica.setText("Gramatica");
 
-        jMenu2.add(jMenu4);
+        jMenuItem1.setText("Cargar Gramatica");
+        cargarGramatica.add(jMenuItem1);
+        cargarGramatica.add(jSeparator3);
 
-        jMenuItem4.setText(" Opcion 3");
-        jMenu2.add(jMenuItem4);
+        editarGramatica.setText("Editar Gramatica");
+        cargarGramatica.add(editarGramatica);
 
-        jMenuBar1.add(jMenu2);
+        menuAdmin.add(cargarGramatica);
 
-        jMenu3.setText("Acerca de");
-        jMenuBar1.add(jMenu3);
+        menuPrincipal.add(menuAdmin);
 
-        setJMenuBar(jMenuBar1);
+        menuAbout.setText("Acerca de");
+        menuPrincipal.add(menuAbout);
+
+        setJMenuBar(menuPrincipal);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -153,20 +169,26 @@ public class Principal extends javax.swing.JFrame
         System.exit(0);
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+    private void cargaOntologiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cargaOntologiaActionPerformed
         
         JFileChooser chooser = new JFileChooser();
         chooser.setCurrentDirectory(new File("./Ontologias"));
-        FileNameExtensionFilter filter = new FileNameExtensionFilter("Ontology Files", "xml", "html","owl");
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("Ontology Files", "xml", "html", "owl");
         chooser.setFileFilter(filter);
         
-        int returnVal = chooser.showOpenDialog(jMenu2);
+        int returnVal = chooser.showOpenDialog(menuOntologia);
         if(returnVal == JFileChooser.APPROVE_OPTION)
         {
-            JOptionPane.showMessageDialog(null,"Se cargo el archivo : " +
+            System.out.println("Ontologia Seleccionada: " +
             chooser.getSelectedFile().getName());
         }
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
+    }//GEN-LAST:event_cargaOntologiaActionPerformed
+
+    private void menuDominioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuDominioActionPerformed
+        Dominio d = new Dominio();
+        this.setVisible(false);
+        d.setVisible(true);
+    }//GEN-LAST:event_menuDominioActionPerformed
 
     /**
      * @param args the command line arguments
@@ -206,17 +228,21 @@ public class Principal extends javax.swing.JFrame
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnIniciar;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenu jMenu3;
-    private javax.swing.JMenu jMenu4;
-    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem cargaOntologia;
+    private javax.swing.JMenu cargarGramatica;
+    private javax.swing.JMenuItem editarGramatica;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem4;
-    private javax.swing.JMenuItem jMenuItem6;
-    private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPopupMenu.Separator jSeparator1;
+    private javax.swing.JPopupMenu.Separator jSeparator2;
+    private javax.swing.JPopupMenu.Separator jSeparator3;
     private javax.swing.JLabel lblTitulo;
+    private javax.swing.JMenu menuAbout;
+    private javax.swing.JMenu menuAdmin;
+    private javax.swing.JMenu menuArchivo;
+    private javax.swing.JMenuItem menuDominio;
+    private javax.swing.JMenu menuOntologia;
+    private javax.swing.JMenuBar menuPrincipal;
     // End of variables declaration//GEN-END:variables
 }
