@@ -39,7 +39,9 @@ public class Principal extends javax.swing.JFrame
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
-        jMenuItem3 = new javax.swing.JMenuItem();
+        jMenu4 = new javax.swing.JMenu();
+        jMenuItem6 = new javax.swing.JMenuItem();
+        jMenuItem7 = new javax.swing.JMenuItem();
         jMenuItem4 = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
 
@@ -100,8 +102,15 @@ public class Principal extends javax.swing.JFrame
         });
         jMenu2.add(jMenuItem1);
 
-        jMenuItem3.setText("Opcion 2");
-        jMenu2.add(jMenuItem3);
+        jMenu4.setText("Gramática");
+
+        jMenuItem6.setText("Editar Gramática");
+        jMenu4.add(jMenuItem6);
+
+        jMenuItem7.setText("Cargar Gramática");
+        jMenu4.add(jMenuItem7);
+
+        jMenu2.add(jMenu4);
 
         jMenuItem4.setText(" Opcion 3");
         jMenu2.add(jMenuItem4);
@@ -200,11 +209,13 @@ public class Principal extends javax.swing.JFrame
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
+    private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
+    private javax.swing.JMenuItem jMenuItem6;
+    private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lblTitulo;
     // End of variables declaration//GEN-END:variables
