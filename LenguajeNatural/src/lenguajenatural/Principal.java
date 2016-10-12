@@ -44,7 +44,7 @@ public class Principal extends javax.swing.JFrame
         menuDominio = new javax.swing.JMenuItem();
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
         cargarGramatica = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
+        cargaGramaticaitem = new javax.swing.JMenuItem();
         jSeparator3 = new javax.swing.JPopupMenu.Separator();
         editarGramatica = new javax.swing.JMenuItem();
         menuAbout = new javax.swing.JMenu();
@@ -99,6 +99,11 @@ public class Principal extends javax.swing.JFrame
         menuAdmin.setText("Administrador");
 
         menuOntologia.setText("Ontología");
+        menuOntologia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuOntologiaActionPerformed(evt);
+            }
+        });
 
         cargaOntologia.setText("Cargar Ontología");
         cargaOntologia.addActionListener(new java.awt.event.ActionListener() {
@@ -122,8 +127,13 @@ public class Principal extends javax.swing.JFrame
 
         cargarGramatica.setText("Gramatica");
 
-        jMenuItem1.setText("Cargar Gramatica");
-        cargarGramatica.add(jMenuItem1);
+        cargaGramaticaitem.setText("Cargar Gramatica");
+        cargaGramaticaitem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cargaGramaticaitemActionPerformed(evt);
+            }
+        });
+        cargarGramatica.add(cargaGramaticaitem);
         cargarGramatica.add(jSeparator3);
 
         editarGramatica.setText("Editar Gramatica");
@@ -190,6 +200,23 @@ public class Principal extends javax.swing.JFrame
         d.setVisible(true);
     }//GEN-LAST:event_menuDominioActionPerformed
 
+    private void menuOntologiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuOntologiaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_menuOntologiaActionPerformed
+
+    private void cargaGramaticaitemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cargaGramaticaitemActionPerformed
+        JFileChooser chooser = new JFileChooser();
+        chooser.setCurrentDirectory(new File("./Gramáticas"));
+      
+          
+        int returnVal = chooser.showOpenDialog(menuOntologia);
+        if(returnVal == JFileChooser.APPROVE_OPTION)
+        {
+            System.out.println("Gramática Seleccionada: " +
+            chooser.getSelectedFile().getName());
+        }
+    }//GEN-LAST:event_cargaGramaticaitemActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -228,10 +255,10 @@ public class Principal extends javax.swing.JFrame
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnIniciar;
+    private javax.swing.JMenuItem cargaGramaticaitem;
     private javax.swing.JMenuItem cargaOntologia;
     private javax.swing.JMenu cargarGramatica;
     private javax.swing.JMenuItem editarGramatica;
-    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPopupMenu.Separator jSeparator1;
