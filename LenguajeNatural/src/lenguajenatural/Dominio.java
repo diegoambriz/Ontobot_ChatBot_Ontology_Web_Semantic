@@ -5,6 +5,8 @@
  */
 package lenguajenatural;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author diego
@@ -32,6 +34,7 @@ public class Dominio extends javax.swing.JFrame {
         txtDomActual = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         cbDominios = new javax.swing.JComboBox<>();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -47,6 +50,13 @@ public class Dominio extends javax.swing.JFrame {
         jLabel2.setText("Lista Dominios");
 
         cbDominios.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Dominio 1", "Dominio 2", "Dominio 3", "Dominio 4" }));
+
+        jButton1.setText("EliminarDomino");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -65,7 +75,9 @@ public class Dominio extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(jLabel2)
                         .addGap(18, 18, 18)
-                        .addComponent(cbDominios, 0, 125, Short.MAX_VALUE)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(cbDominios, 0, 125, Short.MAX_VALUE))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -77,10 +89,14 @@ public class Dominio extends javax.swing.JFrame {
                     .addComponent(txtDomActual, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2)
                     .addComponent(cbDominios, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 223, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(jButton1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 182, Short.MAX_VALUE)
                 .addComponent(btnCerrar)
                 .addContainerGap())
         );
+
+        jButton1.getAccessibleContext().setAccessibleName("btnBorrarDominio");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -91,6 +107,17 @@ public class Dominio extends javax.swing.JFrame {
         this.setVisible(false);
         p.setVisible(true);
     }//GEN-LAST:event_btnCerrarActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        String mensaje = "Estas seguro que deseas Borrar el dominio seleccionado";
+        String titulo = "Eliminar Dominio";
+        int respuesta = JOptionPane.showConfirmDialog(null, mensaje, titulo, JOptionPane.YES_NO_OPTION);
+        
+        if (respuesta == JOptionPane.YES_OPTION)
+        {
+            
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -130,6 +157,7 @@ public class Dominio extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCerrar;
     private javax.swing.JComboBox<String> cbDominios;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JTextField txtDomActual;
