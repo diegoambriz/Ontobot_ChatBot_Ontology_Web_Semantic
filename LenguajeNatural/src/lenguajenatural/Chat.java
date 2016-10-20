@@ -21,6 +21,11 @@ import javax.swing.text.Document;
 import javax.swing.text.StyleConstants;
 import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyledDocument;
+import org.antlr.v4.runtime.ANTLRInputStream;
+import org.antlr.v4.runtime.CommonTokenStream;
+import org.antlr.v4.runtime.RecognitionException;
+//import Gramatica.*;
+
 
 /**
  *
@@ -238,7 +243,7 @@ public class Chat extends javax.swing.JFrame {
                 {
                     JOptionPane.showMessageDialog(null, "No se puede enviar un Mensaje Vacio");
                 }
-        } catch (BadLocationException ex) {
+        } catch (BadLocationException | IOException ex) {
             Logger.getLogger(Chat.class.getName()).log(Level.SEVERE, null, ex);
         }           
     }//GEN-LAST:event_txtMsgKeyPressed
@@ -251,7 +256,7 @@ public class Chat extends javax.swing.JFrame {
              txtMsg.setText(null); 
     }//GEN-LAST:event_txtMsgKeyReleased
 
-    private void addString() throws BadLocationException {
+    private void addString() throws BadLocationException, IOException {
         int hour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY);
         int min = Calendar.getInstance().get(Calendar.MINUTE);
         int sec = Calendar.getInstance().get(Calendar.SECOND);
@@ -272,19 +277,54 @@ public class Chat extends javax.swing.JFrame {
         doc.insertString(doc.getLength(), entrada, null);
         doc.setParagraphAttributes(length+1, 1, attrs, false);
         
-        this.GeneraRespuesta();
+        this.GeneraRespuesta(txtMsg.getText());
         
         txtMsg.setText(null);
     }
     
-    private void GeneraRespuesta() throws BadLocationException {
+    private String hacePregunta(String preg) throws IOException {
+        String respuesta = "";
+        ANTLRInputStream input;
+        try {
+            MyErrorListener listener = new MyErrorListener();
+            input = new ANTLRInputStream(preg);
+            GramaticaLexer lexer = new GramaticaLexer(input);
+            lexer.removeErrorListeners();
+            lexer.addErrorListener(listener);
+            CommonTokenStream tokens = new CommonTokenStream(lexer);
+            GramaticaParser parser = new GramaticaParser(tokens);
+            parser.removeErrorListeners();    
+            parser.addErrorListener(listener);
+            //parser.prog();
+            parser.pp();
+            if(listener.error){
+                respuesta = "Lo siento, no te entiendo";
+            }
+        } catch (RecognitionException ex) {
+            Logger.getLogger(Chat.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
+        return respuesta;
+    }
+    
+    private void GeneraRespuesta(String pregunta) throws BadLocationException, IOException {
         int hour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY);
         int min = Calendar.getInstance().get(Calendar.MINUTE);
         int sec = Calendar.getInstance().get(Calendar.SECOND);
         
+        
         String respuesta;
-        respuesta = "[S" + hour + ":" + min + ":" + sec + "] "
+        String res = "";
+        res = this.hacePregunta(pregunta);
+        if(res != "") {
+            respuesta = "[S" + hour + ":" + min + ":" + sec + "] "
+                            + res + "\n";
+        } else {
+            respuesta = "[S" + hour + ":" + min + ":" + sec + "] "
                             + "Respuesta generada por el sistema (temp)" + "\n";
+        }
+        
         
         StyledDocument doc = txtChat.getStyledDocument();
         int length = doc.getLength();
@@ -308,7 +348,7 @@ public class Chat extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "No se puede enviar un Mensaje Vacio");
             }
         } 
-        catch (BadLocationException ex)
+        catch (BadLocationException | IOException ex)
         {
             Logger.getLogger(Chat.class.getName()).log(Level.SEVERE, null, ex);
         }

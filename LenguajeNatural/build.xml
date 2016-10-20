@@ -10,6 +10,21 @@
 <project name="LenguajeNatural" default="default" basedir=".">
     <description>Builds, tests, and runs the project LenguajeNatural.</description>
     <import file="nbproject/build-impl.xml"/>
+    
+    <target name="-pre-compile" depends="antlr">
+    </target>
+    
+    <target name="init-antlr">
+        <property name="antlr.jar" location="antlr-4.5.3-complete.jar" />
+        <property name="antlr.grammar" location="src/lenguajenatural/Gramatica.g4" />
+    </target>
+    
+    <target name="antlr" depends="init-antlr" unless="up-to-date">
+        <java classname="org.antlr.v4.Tool" fork="true">
+            <arg value="${antlr.grammar}"/>
+            <classpath path="${antlr.jar}"/>
+        </java>
+    </target>
     <!--
 
     There exist several targets which are by default empty and which can be 
