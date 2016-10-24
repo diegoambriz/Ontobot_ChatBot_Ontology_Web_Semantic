@@ -183,7 +183,7 @@ public class Principal extends javax.swing.JFrame
         
         JFileChooser chooser = new JFileChooser();
         chooser.setCurrentDirectory(new File("./Ontologias"));
-        FileNameExtensionFilter filter = new FileNameExtensionFilter("Ontology Files", "xml", "html", "owl");
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("Archivos de Ontologias", "xml", "html", "owl");
         chooser.setFileFilter(filter);
         
         int returnVal = chooser.showOpenDialog(menuOntologia);
@@ -205,10 +205,13 @@ public class Principal extends javax.swing.JFrame
     }//GEN-LAST:event_menuOntologiaActionPerformed
 
     private void cargaGramaticaitemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cargaGramaticaitemActionPerformed
+        
         JFileChooser chooser = new JFileChooser();
-        chooser.setCurrentDirectory(new File("./Gramáticas"));
+        chooser.setCurrentDirectory(new File("./Gramaticas"));
       
-          
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("Archivos de Gramatica", "gr");
+        chooser.setFileFilter(filter);
+        
         int returnVal = chooser.showOpenDialog(menuOntologia);
         if(returnVal == JFileChooser.APPROVE_OPTION)
         {

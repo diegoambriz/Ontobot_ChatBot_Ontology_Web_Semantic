@@ -8,6 +8,8 @@
 
 package lenguajenatural;
 
+import com.inet.jortho.FileUserDictionary;
+import com.inet.jortho.SpellChecker;
 import java.io.IOException;
 import java.util.Calendar;
 import java.util.StringTokenizer;
@@ -45,6 +47,9 @@ public class Chat extends javax.swing.JFrame {
         txtMsg.setLineWrap(true);
         txtMsg.setWrapStyleWord(true);
         fontSize = 13;
+        SpellChecker.setUserDictionaryProvider(new FileUserDictionary());      
+        SpellChecker.registerDictionaries(this.getClass().getResource("/dictionary"), "es");
+        SpellChecker.register(txtMsg);
     }
 
     /**
