@@ -7,9 +7,15 @@
 package lenguajenatural;
 
 import java.io.File;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import org.antlr.v4.runtime.ANTLRInputStream;
+import org.antlr.v4.runtime.CommonTokenStream;
+import org.antlr.v4.runtime.RecognitionException;
 
 /**
  * Interfaz Principal del Proyecto
@@ -209,7 +215,7 @@ public class Principal extends javax.swing.JFrame
         JFileChooser chooser = new JFileChooser();
         chooser.setCurrentDirectory(new File("./Gramaticas"));
       
-        FileNameExtensionFilter filter = new FileNameExtensionFilter("Archivos de Gramatica", "gr");
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("Archivos de Gramatica", "g","g4");
         chooser.setFileFilter(filter);
         
         int returnVal = chooser.showOpenDialog(menuOntologia);
@@ -217,9 +223,76 @@ public class Principal extends javax.swing.JFrame
         {
             System.out.println("Gramática Seleccionada: " +
             chooser.getSelectedFile().getName());
+            
+            System.out.println("Ruta Seleccionada: " +
+            chooser.getSelectedFile().getAbsolutePath());
+            
+            //Copia el archivo de gramática (.g o .g4) a la carpeta de proyecto con el nombre MyGrammar.g
+            FileCopy filecopy = new FileCopy(chooser.getSelectedFile().getAbsolutePath(), "src/lenguajenatural/"+chooser.getSelectedFile().getName());
+            //filecopy = new FileCopy("src/lenguajenatural/"+chooser.getSelectedFile().getName(), "src/lenguajenatural/MyGrammar.g");
+            
+            
+            try {
+                generaAnalizadores();
+            } catch (InterruptedException ex) {
+                Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }//GEN-LAST:event_cargaGramaticaitemActionPerformed
 
+    private void generaAnalizadores() throws InterruptedException {
+        try {
+            
+          Process pro = Runtime.getRuntime().exec("java -jar antlr-4.5.3-complete.jar src/lenguajenatural/MyGrammar.g");
+          pro.waitFor();
+          
+              FileCopy fileCopy;
+        File borrar;
+        fileCopy = new FileCopy("MyGrammar.tokens", "src/lenguajenatural/MyGrammar.tokens");
+        borrar = new File("MyGrammar.tokens");
+        borrar.delete();
+        fileCopy = new FileCopy("MyGrammarBaseListener.java", "src/lenguajenatural/MyGrammarBaseListener.java");
+        borrar = new File("MyGrammarBaseListener.java");
+        borrar.delete();
+        fileCopy = new FileCopy("MyGrammarLexer.java", "src/lenguajenatural/MyGrammarLexer.java");
+        borrar = new File("MyGrammarLexer.java");
+        borrar.delete();
+        fileCopy = new FileCopy("MyGrammarLexer.tokens", "src/lenguajenatural/MyGrammarLexer.tokens");
+        borrar = new File("MyGrammarLexer.tokens");
+        borrar.delete();
+        fileCopy = new FileCopy("MyGrammarListener.java", "src/lenguajenatural/MyGrammarListener.java");
+        borrar = new File("MyGrammarListener.java");
+        borrar.delete();
+        fileCopy = new FileCopy("MyGrammarParser.java", "src/lenguajenatural/MyGrammarParser.java");
+        borrar = new File("MyGrammarParser.java");
+        borrar.delete();
+          
+        
+        ANTLRInputStream input;
+        // TODO code application logic here
+        try {
+    //MyErrorListener listener = new MyErrorListener();
+    input = new ANTLRInputStream("5*8\n");
+    MyGrammarLexer lexer = new MyGrammarLexer(input);
+    //lexer.removeErrorListeners();
+    //lexer.addErrorListener(listener);
+    CommonTokenStream tokens = new CommonTokenStream(lexer);
+    MyGrammarParser parser = new MyGrammarParser(tokens);
+    //parser.removeErrorListeners();    
+    //parser.addErrorListener(listener);
+    parser.prog();
+} catch (RecognitionException ex) {
+    Logger.getLogger(LenguajeNatural.class.getName()).log(Level.SEVERE, null, ex);
+}
+        
+        
+        
+        } catch (IOException ex) {
+          System.out.println(ex);
+      }
+        
+    }
+    
     /**
      * @param args the command line arguments
      */
