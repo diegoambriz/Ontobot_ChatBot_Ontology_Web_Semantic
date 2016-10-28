@@ -61,7 +61,6 @@ public class Chat extends javax.swing.JFrame {
         SpellChecker.registerDictionaries(this.getClass().getResource("/dictionary"), "es");
         SpellChecker.register(txtMsg);
         
-        
         SpellCheckerOptions sco = new SpellCheckerOptions();
         sco.setCaseSensitive(true);
         sco.setSuggestionsLimitMenu(10);
