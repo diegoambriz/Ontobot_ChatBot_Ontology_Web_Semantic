@@ -503,7 +503,9 @@ public class Chat extends javax.swing.JFrame {
 
     private void btnBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBorrarActionPerformed
         
-        String mensaje = "Estas seguro que deseas Borrar el Historial de Conversacion?";
+        if(txtChat.getText().length() != 0)
+        {
+            String mensaje = "Estas seguro que deseas Borrar el Historial de Conversacion?";
         String titulo = "Borrar Historial";
         int respuesta = JOptionPane.showConfirmDialog(null, mensaje, titulo, JOptionPane.YES_NO_OPTION);
         
@@ -511,6 +513,8 @@ public class Chat extends javax.swing.JFrame {
         {
             txtChat.setText("");
         }
+        }
+        
         
     }//GEN-LAST:event_btnBorrarActionPerformed
 
