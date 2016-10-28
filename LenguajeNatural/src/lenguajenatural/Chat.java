@@ -9,7 +9,9 @@
 package lenguajenatural;
 
 import com.inet.jortho.FileUserDictionary;
+import com.inet.jortho.PopupListener;
 import com.inet.jortho.SpellChecker;
+import com.inet.jortho.SpellCheckerOptions;
 import java.io.File;
 import java.io.IOException;
 import java.util.Calendar;
@@ -19,6 +21,7 @@ import java.util.logging.Logger;
 import javax.swing.JCheckBox;
 import javax.swing.JTextPane;
 import javax.swing.JOptionPane;
+import javax.swing.JPopupMenu;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.Document;
 import javax.swing.text.StyleConstants;
@@ -50,12 +53,20 @@ public class Chat extends javax.swing.JFrame {
         txtMsg.setLineWrap(true);
         txtMsg.setWrapStyleWord(true);
         fontSize = 13;
-        SpellChecker.setUserDictionaryProvider(new FileUserDictionary());      
-        SpellChecker.registerDictionaries(this.getClass().getResource("/dictionary"), "es");
-        SpellChecker.register(txtMsg);
         bandera = false;
         cargaDominios();
         //gramatica = '';//default
+        
+        SpellChecker.setUserDictionaryProvider(new FileUserDictionary());      
+        SpellChecker.registerDictionaries(this.getClass().getResource("/dictionary"), "es");
+        SpellChecker.register(txtMsg);
+        
+        
+        SpellCheckerOptions sco = new SpellCheckerOptions();
+        sco.setCaseSensitive(true);
+        sco.setSuggestionsLimitMenu(10);
+        JPopupMenu popup = SpellChecker.createCheckerPopup(sco);
+        txtMsg.addMouseListener(new PopupListener(popup));
     }
 
     /**
