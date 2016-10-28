@@ -30,10 +30,10 @@ public class edGramatica extends javax.swing.JFrame {
     private File archivo;
     
     
-    public edGramatica() {
+    public edGramatica() 
+    {
         initComponents();
-        archivo = null;
-       
+        archivo = null;   
     }
 
     /**
@@ -199,7 +199,7 @@ public class edGramatica extends javax.swing.JFrame {
         try {
             
             JFileChooser file = new JFileChooser();
-            file.setCurrentDirectory(new File("./Gramáticas"));
+            file.setCurrentDirectory(new File("./Gramaticas"));
             FileNameExtensionFilter filter = new FileNameExtensionFilter("Archivos de Gramatica", "g","g4");
             file.setFileFilter(filter);
             file.setAcceptAllFileFilterUsed(false);

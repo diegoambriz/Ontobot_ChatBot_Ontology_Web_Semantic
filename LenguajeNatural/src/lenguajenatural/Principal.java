@@ -143,6 +143,11 @@ public class Principal extends javax.swing.JFrame
         cargarGramatica.add(jSeparator3);
 
         editarGramatica.setText("Editar Gramatica");
+        editarGramatica.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editarGramaticaActionPerformed(evt);
+            }
+        });
         cargarGramatica.add(editarGramatica);
 
         menuAdmin.add(cargarGramatica);
@@ -231,7 +236,6 @@ public class Principal extends javax.swing.JFrame
             FileCopy filecopy = new FileCopy(chooser.getSelectedFile().getAbsolutePath(), "src/lenguajenatural/"+chooser.getSelectedFile().getName());
             //filecopy = new FileCopy("src/lenguajenatural/"+chooser.getSelectedFile().getName(), "src/lenguajenatural/MyGrammar.g");
             
-            
             try {
                 generaAnalizadores();
             } catch (InterruptedException ex) {
@@ -239,6 +243,13 @@ public class Principal extends javax.swing.JFrame
             }
         }
     }//GEN-LAST:event_cargaGramaticaitemActionPerformed
+
+    private void editarGramaticaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editarGramaticaActionPerformed
+        
+        edGramatica e = new edGramatica();
+        this.setVisible(false);
+        e.setVisible(true);
+    }//GEN-LAST:event_editarGramaticaActionPerformed
 
     private void generaAnalizadores() throws InterruptedException {
         try {
