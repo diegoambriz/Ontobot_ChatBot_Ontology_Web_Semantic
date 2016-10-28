@@ -10,6 +10,7 @@ package lenguajenatural;
 
 import com.inet.jortho.FileUserDictionary;
 import com.inet.jortho.SpellChecker;
+import java.io.File;
 import java.io.IOException;
 import java.util.Calendar;
 import java.util.StringTokenizer;
@@ -39,6 +40,8 @@ public class Chat extends javax.swing.JFrame {
      * Creates new form Chat
      */
     private int fontSize;
+    private boolean bandera;
+    public char gramatica;
     
     public Chat() {
         initComponents();
@@ -50,6 +53,9 @@ public class Chat extends javax.swing.JFrame {
         SpellChecker.setUserDictionaryProvider(new FileUserDictionary());      
         SpellChecker.registerDictionaries(this.getClass().getResource("/dictionary"), "es");
         SpellChecker.register(txtMsg);
+        bandera = false;
+        cargaDominios();
+        //gramatica = '';//default
     }
 
     /**
@@ -78,6 +84,7 @@ public class Chat extends javax.swing.JFrame {
         txtChat = new javax.swing.JTextPane();
         jSpinner1 = new javax.swing.JSpinner();
         jLabel1 = new javax.swing.JLabel();
+        cbDominio = new javax.swing.JComboBox<>();
 
         jScrollPane1.setViewportView(jTextPane2);
 
@@ -173,6 +180,17 @@ public class Chat extends javax.swing.JFrame {
 
         jLabel1.setText("Tamaño de fuente");
 
+        cbDominio.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cbDominioItemStateChanged(evt);
+            }
+        });
+        cbDominio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbDominioActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -187,18 +205,22 @@ public class Chat extends javax.swing.JFrame {
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addComponent(jScrollPane3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnVolver, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnGuardar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(sldVolumen, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblVolumen))
-                    .addComponent(btnBorrar)
-                    .addGroup(layout.createSequentialGroup()
                         .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(3, 3, 3)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(cbDominio, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(sldVolumen, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(lblVolumen))
+                            .addComponent(btnBorrar))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -212,7 +234,9 @@ public class Chat extends javax.swing.JFrame {
                         .addComponent(btnVolver)
                         .addGap(18, 18, 18)
                         .addComponent(btnBorrar)
-                        .addGap(94, 94, 94)
+                        .addGap(33, 33, 33)
+                        .addComponent(cbDominio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(41, 41, 41)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -253,6 +277,22 @@ public class Chat extends javax.swing.JFrame {
         }           
     }//GEN-LAST:event_txtMsgKeyPressed
 
+    private void cargaDominios(){
+        //cbDominio.removeAllItems();
+        File dir = new File("Ontologias/");
+        String[] ficheros = dir.list();
+        if (ficheros == null)
+        {
+        //System.out.println("No hay ficheros en el directorio especificado");
+        }
+        else { 
+          for (int x=0;x<ficheros.length;x++)
+            //System.out.println(ficheros[x]);
+          cbDominio.addItem(ficheros[x]);
+        }
+        bandera = true;
+    }
+    
     private void txtMsgKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtMsgKeyReleased
         // TODO add your handling code here:
          int key = evt.getKeyCode();
@@ -293,15 +333,30 @@ public class Chat extends javax.swing.JFrame {
         try {
             MyErrorListener listener = new MyErrorListener();
             input = new ANTLRInputStream(preg);
-            GramaticaLexer lexer = new GramaticaLexer(input);
-            lexer.removeErrorListeners();
-            lexer.addErrorListener(listener);
-            CommonTokenStream tokens = new CommonTokenStream(lexer);
-            GramaticaParser parser = new GramaticaParser(tokens);
-            parser.removeErrorListeners();    
-            parser.addErrorListener(listener);
-            //parser.prog();
-            parser.pp();
+            if(gramatica == 'd'){
+                GramaticaLexer lexer = new GramaticaLexer(input);
+                lexer.removeErrorListeners();
+                lexer.addErrorListener(listener);
+                CommonTokenStream tokens = new CommonTokenStream(lexer);
+                GramaticaParser parser = new GramaticaParser(tokens);
+                parser.removeErrorListeners();    
+                parser.addErrorListener(listener);
+                //parser.prog();
+                parser.s();
+            } else if(gramatica == 'c'){
+                input = new ANTLRInputStream(preg+"\n");
+                MyGrammarLexer lexer = new MyGrammarLexer(input);
+                lexer.removeErrorListeners();
+                lexer.addErrorListener(listener);
+                CommonTokenStream tokens = new CommonTokenStream(lexer);
+                MyGrammarParser parser = new MyGrammarParser(tokens);
+                parser.removeErrorListeners();    
+                parser.addErrorListener(listener);
+                //parser.prog();
+                parser.prog();
+                respuesta = String.valueOf(parser.resultado);
+            }
+            
             if(listener.error){
                 respuesta = "Lo siento, no te entiendo";
             }
@@ -326,8 +381,10 @@ public class Chat extends javax.swing.JFrame {
             respuesta = "[S" + hour + ":" + min + ":" + sec + "] "
                             + res + "\n";
         } else {
+            /*respuesta = "[S" + hour + ":" + min + ":" + sec + "] "
+                            + "Respuesta generada por el sistema (temp)" + "\n";*/
             respuesta = "[S" + hour + ":" + min + ":" + sec + "] "
-                            + "Respuesta generada por el sistema (temp)" + "\n";
+                            + "OK (temp)" + "\n";
         }
         
         
@@ -480,6 +537,17 @@ public class Chat extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_formWindowClosing
 
+    private void cbDominioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbDominioActionPerformed
+        // TODO add your handling code here:
+        if(bandera)
+            JOptionPane.showMessageDialog(null, "Se ha cambiado el dominio a " + cbDominio.getSelectedItem());
+    }//GEN-LAST:event_cbDominioActionPerformed
+
+    private void cbDominioItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbDominioItemStateChanged
+        // TODO add your handling code here:
+        //JOptionPane.showMessageDialog(null, "Se ha cambiado el dominio a " + cbDominio.getSelectedItem());
+    }//GEN-LAST:event_cbDominioItemStateChanged
+
     /**
      * @param args the command line arguments
      */
@@ -520,6 +588,7 @@ public class Chat extends javax.swing.JFrame {
     private javax.swing.JButton btnEnviar;
     private javax.swing.JButton btnGuardar;
     private javax.swing.JButton btnVolver;
+    private javax.swing.JComboBox<String> cbDominio;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JDialog jDialog1;

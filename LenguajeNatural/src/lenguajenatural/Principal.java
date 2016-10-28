@@ -23,6 +23,7 @@ import org.antlr.v4.runtime.RecognitionException;
  */
 public class Principal extends javax.swing.JFrame 
 {
+    private char gram = 'd';
     public Principal() 
     {
         initComponents(); 
@@ -37,6 +38,7 @@ public class Principal extends javax.swing.JFrame
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jRadioButtonMenuItem2 = new javax.swing.JRadioButtonMenuItem();
         jPanel1 = new javax.swing.JPanel();
         lblTitulo = new javax.swing.JLabel();
         btnIniciar = new javax.swing.JButton();
@@ -50,10 +52,16 @@ public class Principal extends javax.swing.JFrame
         menuDominio = new javax.swing.JMenuItem();
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
         cargarGramatica = new javax.swing.JMenu();
+        jMenu1 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuItem3 = new javax.swing.JMenuItem();
         cargaGramaticaitem = new javax.swing.JMenuItem();
         jSeparator3 = new javax.swing.JPopupMenu.Separator();
         editarGramatica = new javax.swing.JMenuItem();
         menuAbout = new javax.swing.JMenu();
+
+        jRadioButtonMenuItem2.setSelected(true);
+        jRadioButtonMenuItem2.setText("jRadioButtonMenuItem2");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -133,6 +141,26 @@ public class Principal extends javax.swing.JFrame
 
         cargarGramatica.setText("Gramatica");
 
+        jMenu1.setText("Cambiar Gramatica");
+
+        jMenuItem1.setText("Default");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem1);
+
+        jMenuItem3.setText("Calculadora");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem3);
+
+        cargarGramatica.add(jMenu1);
+
         cargaGramaticaitem.setText("Cargar Gramatica");
         cargaGramaticaitem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -183,6 +211,7 @@ public class Principal extends javax.swing.JFrame
         Chat c = new Chat();
         this.setVisible(false);
         c.setVisible(true);
+        c.gramatica = gram;
     }//GEN-LAST:event_btnIniciarActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
@@ -250,6 +279,17 @@ public class Principal extends javax.swing.JFrame
         this.setVisible(false);
         e.setVisible(true);
     }//GEN-LAST:event_editarGramaticaActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        // TODO add your handling code here:
+        gram = 'd';
+        
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        // TODO add your handling code here:
+        gram = 'c';
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     private void generaAnalizadores() throws InterruptedException {
         try {
@@ -346,8 +386,12 @@ public class Principal extends javax.swing.JFrame
     private javax.swing.JMenuItem cargaOntologia;
     private javax.swing.JMenu cargarGramatica;
     private javax.swing.JMenuItem editarGramatica;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem2;
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JPopupMenu.Separator jSeparator2;
     private javax.swing.JPopupMenu.Separator jSeparator3;

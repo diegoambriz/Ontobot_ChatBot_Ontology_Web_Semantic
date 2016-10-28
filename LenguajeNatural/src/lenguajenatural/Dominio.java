@@ -5,6 +5,7 @@
  */
 package lenguajenatural;
 
+import java.io.File;
 import javax.swing.JOptionPane;
 
 /**
@@ -18,6 +19,23 @@ public class Dominio extends javax.swing.JFrame {
      */
     public Dominio() {
         initComponents();
+        cargaDominios();
+    }
+    
+    private void cargaDominios(){
+        cbDominios.removeAllItems();
+        File dir = new File("Ontologias/");
+        String[] ficheros = dir.list();
+        if (ficheros == null)
+        {
+        //System.out.println("No hay ficheros en el directorio especificado");
+        }
+        else { 
+          for (int x=0;x<ficheros.length;x++)
+            //System.out.println(ficheros[x]);
+          cbDominios.addItem(ficheros[x]);
+        }
+        
     }
 
     /**
@@ -30,8 +48,6 @@ public class Dominio extends javax.swing.JFrame {
     private void initComponents() {
 
         btnCerrar = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
-        txtDomActual = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         cbDominios = new javax.swing.JComboBox<>();
         jButton1 = new javax.swing.JButton();
@@ -45,9 +61,7 @@ public class Dominio extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setText("Dominio Actual");
-
-        jLabel2.setText("Lista Dominios");
+        jLabel2.setText("Dominios existentes:");
 
         cbDominios.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Dominio 1", "Dominio 2", "Dominio 3", "Dominio 4" }));
 
@@ -65,37 +79,30 @@ public class Dominio extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnCerrar)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(18, 18, 18)
-                        .addComponent(txtDomActual, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel2)
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(cbDominios, 0, 125, Short.MAX_VALUE))))
-                .addContainerGap())
+                    .addComponent(btnCerrar)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(jButton1)
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(jLabel2)
+                            .addGap(18, 18, 18)
+                            .addComponent(cbDominios, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(23, 23, 23)
+                .addGap(20, 20, 20)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(txtDomActual, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2)
                     .addComponent(cbDominios, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jButton1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 182, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 185, Short.MAX_VALUE)
                 .addComponent(btnCerrar)
                 .addContainerGap())
         );
 
+        jLabel2.getAccessibleContext().setAccessibleName("Dominios existentes:");
         jButton1.getAccessibleContext().setAccessibleName("btnBorrarDominio");
 
         pack();
@@ -115,7 +122,14 @@ public class Dominio extends javax.swing.JFrame {
         
         if (respuesta == JOptionPane.YES_OPTION)
         {
-            
+            File fichero = new File("Ontologias/"+cbDominios.getSelectedItem());
+            if (fichero.delete()){
+            //System.out.println("El fichero ha sido borrado satisfactoriamente");
+                JOptionPane.showMessageDialog(null, "Se ha eliminado el dominio"+cbDominios.getSelectedItem());
+                cargaDominios();
+            }
+            else
+               System.out.println("El fichero no puede ser borrado");
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -158,8 +172,6 @@ public class Dominio extends javax.swing.JFrame {
     private javax.swing.JButton btnCerrar;
     private javax.swing.JComboBox<String> cbDominios;
     private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JTextField txtDomActual;
     // End of variables declaration//GEN-END:variables
 }

@@ -13,6 +13,7 @@ import java.util.ArrayList;
 
 @SuppressWarnings({"all", "warnings", "unchecked", "unused", "cast"})
 public class MyGrammarParser extends Parser {
+        public int resultado;
 	static { RuntimeMetaData.checkVersion("4.5.3", RuntimeMetaData.VERSION); }
 
 	protected static final DFA[] _decisionToDFA;
@@ -138,6 +139,7 @@ public class MyGrammarParser extends Parser {
 		finally {
 			exitRule();
 		}
+                
 		return _localctx;
 	}
 
@@ -178,6 +180,7 @@ public class MyGrammarParser extends Parser {
 				setState(16);
 				match(NEWLINE);
 				System.out.println(((StatContext)_localctx).expr.value);
+                                resultado = ((StatContext)_localctx).expr.value;
 				}
 				break;
 			case 2:
