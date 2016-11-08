@@ -264,12 +264,13 @@ public class Principal extends javax.swing.JFrame
             //Copia el archivo de gramática (.g o .g4) a la carpeta de proyecto con el nombre MyGrammar.g
             FileCopy filecopy = new FileCopy(chooser.getSelectedFile().getAbsolutePath(), "src/lenguajenatural/"+chooser.getSelectedFile().getName());
             //filecopy = new FileCopy("src/lenguajenatural/"+chooser.getSelectedFile().getName(), "src/lenguajenatural/MyGrammar.g");
-            
+            /*
             try {
                 generaAnalizadores();
             } catch (InterruptedException ex) {
                 Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
             }
+            */
         }
     }//GEN-LAST:event_cargaGramaticaitemActionPerformed
 

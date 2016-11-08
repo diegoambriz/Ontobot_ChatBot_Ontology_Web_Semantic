@@ -30,6 +30,8 @@ import javax.swing.text.StyledDocument;
 import org.antlr.v4.runtime.ANTLRInputStream;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.RecognitionException;
+import com.sun.speech.freetts.Voice;
+import com.sun.speech.freetts.VoiceManager;
 //import Gramatica.*;
 
 
@@ -395,8 +397,10 @@ public class Chat extends javax.swing.JFrame {
                             + "Respuesta generada por el sistema (temp)" + "\n";*/
             respuesta = "[S" + hour + ":" + min + ":" + sec + "] "
                             + "OK (temp)" + "\n";
+            res = "OK";
         }
         
+        reproduceVoz(res);
         
         StyledDocument doc = txtChat.getStyledDocument();
         int length = doc.getLength();
@@ -406,8 +410,22 @@ public class Chat extends javax.swing.JFrame {
         StyleConstants.setFontSize(attrsResp, fontSize);
         doc.insertString(doc.getLength(), respuesta, null);
         doc.setParagraphAttributes(length+1, 1, attrsResp, false);
+        
+        
     }
-    
+    private static final String VOICENAME="kevin";
+    private void reproduceVoz(String texto) {
+        Voice voice;
+        VoiceManager vm = VoiceManager.getInstance();
+        voice = vm.getVoice(VOICENAME);
+        //listAllVoices();
+        voice.allocate();
+        
+        try{
+            voice.speak(texto);
+        }catch (Exception e){
+        }
+    }
     private void btnEnviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnviarActionPerformed
         try
         {
