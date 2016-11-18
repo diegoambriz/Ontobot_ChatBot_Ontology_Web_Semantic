@@ -47,6 +47,10 @@ public class Chat extends javax.swing.JFrame {
     private int fontSize;
     private boolean bandera;
     public char gramatica;
+    private VoiceManager freettsVM;
+    private Voice freettsVoice;
+    private String dir;
+    private String vozNombre;
     
     public Chat() {
         initComponents();
@@ -56,6 +60,7 @@ public class Chat extends javax.swing.JFrame {
         txtMsg.setWrapStyleWord(true);
         fontSize = 13;
         bandera = false;
+        vozNombre = "mbrola_us1";
         cargaDominios();
         //gramatica = '';//default
         
@@ -95,7 +100,7 @@ public class Chat extends javax.swing.JFrame {
         jPanel4 = new javax.swing.JPanel();
         sldVolumen = new javax.swing.JSlider();
         jPanel5 = new javax.swing.JPanel();
-        cbDominio1 = new javax.swing.JComboBox<>();
+        cbTipoVoz = new javax.swing.JComboBox<>();
         jPanel6 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         txtChat = new javax.swing.JTextPane();
@@ -266,15 +271,15 @@ public class Chat extends javax.swing.JFrame {
 
         jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder("Tipo de Voz"));
 
-        cbDominio1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Hombre", "Mujer" }));
-        cbDominio1.addItemListener(new java.awt.event.ItemListener() {
+        cbTipoVoz.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Mujer", "Hombre 1", "Hombre 2" }));
+        cbTipoVoz.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                cbDominio1ItemStateChanged(evt);
+                cbTipoVozItemStateChanged(evt);
             }
         });
-        cbDominio1.addActionListener(new java.awt.event.ActionListener() {
+        cbTipoVoz.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbDominio1ActionPerformed(evt);
+                cbTipoVozActionPerformed(evt);
             }
         });
 
@@ -284,13 +289,13 @@ public class Chat extends javax.swing.JFrame {
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(cbDominio1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(cbTipoVoz, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
-                .addComponent(cbDominio1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(cbTipoVoz, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 8, Short.MAX_VALUE))
         );
 
@@ -535,19 +540,32 @@ public class Chat extends javax.swing.JFrame {
         
         
     }
-    private static final String VOICENAME="kevin16";
+    
     private void reproduceVoz(String texto) {
-        Voice voice;
-        VoiceManager vm = VoiceManager.getInstance();
-        voice = vm.getVoice(VOICENAME);
-        //listAllVoices();
-        voice.allocate();
-        
-        try{
-            voice.speak(texto);
-        }catch (Exception e){
-        }
+        File miDir = new File (".");
+        try {
+          dir = (miDir.getCanonicalPath() + "\\mbrola");
+          }
+        catch(Exception e) {
+          e.printStackTrace();
+       }
+        // Most important part!
+        System.out.println(dir);
+        System.setProperty("mbrola.base", dir);
+        freettsVM = VoiceManager.getInstance();
+
+        // Simply change to MBROLA voice
+        freettsVoice = freettsVM.getVoice(vozNombre);
+        // Allocate your chosen voice
+        freettsVoice.allocate();
+        sayWords(texto);    
     }
+    
+    private void sayWords(String words) {
+        // Make her speak!
+        freettsVoice.speak(words);
+    }
+    
     private void btnEnviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnviarActionPerformed
         try
         {
@@ -702,13 +720,24 @@ public class Chat extends javax.swing.JFrame {
         //JOptionPane.showMessageDialog(null, "Se ha cambiado el dominio a " + cbDominio.getSelectedItem());
     }//GEN-LAST:event_cbDominioItemStateChanged
 
-    private void cbDominio1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbDominio1ActionPerformed
+    private void cbTipoVozActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbTipoVozActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_cbDominio1ActionPerformed
+        switch(cbTipoVoz.getSelectedIndex()){
+            case 0:
+                vozNombre = "mbrola_us1";
+                break;
+            case 1:
+                vozNombre = "mbrola_us2";
+                break;
+            case 2:
+                vozNombre = "mbrola_us3";
+                break;
+        }
+    }//GEN-LAST:event_cbTipoVozActionPerformed
 
-    private void cbDominio1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbDominio1ItemStateChanged
+    private void cbTipoVozItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbTipoVozItemStateChanged
         // TODO add your handling code here:
-    }//GEN-LAST:event_cbDominio1ItemStateChanged
+    }//GEN-LAST:event_cbTipoVozItemStateChanged
 
     /**
      * @param args the command line arguments
@@ -751,7 +780,7 @@ public class Chat extends javax.swing.JFrame {
     private javax.swing.JButton btnGuardar;
     private javax.swing.JButton btnVolver;
     private javax.swing.JComboBox<String> cbDominio;
-    private javax.swing.JComboBox<String> cbDominio1;
+    private javax.swing.JComboBox<String> cbTipoVoz;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JDialog jDialog1;
