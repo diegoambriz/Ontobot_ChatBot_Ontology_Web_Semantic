@@ -32,6 +32,7 @@ import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.RecognitionException;
 import com.sun.speech.freetts.Voice;
 import com.sun.speech.freetts.VoiceManager;
+import java.awt.Color;
 //import Gramatica.*;
 
 
@@ -448,7 +449,7 @@ public class Chat extends javax.swing.JFrame {
         int sec = Calendar.getInstance().get(Calendar.SECOND);
         String entrada;
         
-        entrada = "[U" + hour + ":" + min + ":" + sec + "] "
+        entrada = "[Usted][" + hour + ":" + min + ":" + sec + "] "
                             +txtMsg.getText() + "\n";
         
         StyledDocument doc = txtChat.getStyledDocument();
@@ -457,6 +458,7 @@ public class Chat extends javax.swing.JFrame {
         SimpleAttributeSet attrs = new SimpleAttributeSet();
         
         StyleConstants.setBold(attrs, true);
+        StyleConstants.setForeground(attrs, Color.BLUE);
         StyleConstants.setAlignment(attrs, StyleConstants.ALIGN_LEFT);
         StyleConstants.setFontSize(attrs, fontSize);
                 
@@ -524,11 +526,11 @@ public class Chat extends javax.swing.JFrame {
         
         
         if(res.length() > 0) {
-            respuesta = "[S" + hour + ":" + min + ":" + sec + "] "
+            respuesta = "[OntoBot][" + hour + ":" + min + ":" + sec + "] "
                             + res + "\n";
         } else {
             res = "Lo siento, no poseo esa información";
-            respuesta = "[S" + hour + ":" + min + ":" + sec + "] "
+            respuesta = "[OntoBot][" + hour + ":" + min + ":" + sec + "] "
                             + res + "\n";
             //res = "OK";
         }
@@ -538,6 +540,7 @@ public class Chat extends javax.swing.JFrame {
         StyledDocument doc = txtChat.getStyledDocument();
         int length = doc.getLength();
         SimpleAttributeSet attrsResp = new SimpleAttributeSet();
+        StyleConstants.setForeground(attrsResp, Color.RED);
         StyleConstants.setBold(attrsResp, false);
         StyleConstants.setAlignment(attrsResp, StyleConstants.ALIGN_RIGHT);
         StyleConstants.setFontSize(attrsResp, fontSize);
