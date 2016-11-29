@@ -51,6 +51,7 @@ public class Chat extends javax.swing.JFrame {
     private Voice freettsVoice;
     private String dir;
     private String vozNombre;
+    private String temaOntologia = "Francia";
     
     public Chat() {
         initComponents();
@@ -202,6 +203,7 @@ public class Chat extends javax.swing.JFrame {
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Dominio"));
 
+        cbDominio.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Francia", "Ferrari", "Bill Gates", "Python" }));
         cbDominio.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 cbDominioItemStateChanged(evt);
@@ -418,18 +420,18 @@ public class Chat extends javax.swing.JFrame {
 
     private void cargaDominios(){
         //cbDominio.removeAllItems();
-        File dir = new File("Ontologias/");
+        /*File dir = new File("Ontologias/");
         String[] ficheros = dir.list();
         if (ficheros == null)
-        {
+        {*/
         //System.out.println("No hay ficheros en el directorio especificado");
-        }
+        /*}
         else { 
           for (int x=0;x<ficheros.length;x++)
             //System.out.println(ficheros[x]);
           cbDominio.addItem(ficheros[x]);
         }
-        bandera = true;
+        bandera = true;*/
     }
     
     private void txtMsgKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtMsgKeyReleased
@@ -512,19 +514,23 @@ public class Chat extends javax.swing.JFrame {
         int min = Calendar.getInstance().get(Calendar.MINUTE);
         int sec = Calendar.getInstance().get(Calendar.SECOND);
         
-        
         String respuesta;
         String res = "";
         res = this.hacePregunta(pregunta);
-        if(res != "") {
+        
+        ConsultaOntologia con = new ConsultaOntologia(temaOntologia,pregunta);
+        res = con.getResultado().trim();
+        System.out.println("*" + res + "*" + res.length());
+        
+        
+        if(res.length() > 0) {
             respuesta = "[S" + hour + ":" + min + ":" + sec + "] "
                             + res + "\n";
         } else {
-            /*respuesta = "[S" + hour + ":" + min + ":" + sec + "] "
-                            + "Respuesta generada por el sistema (temp)" + "\n";*/
+            res = "Lo siento, no poseo esa información";
             respuesta = "[S" + hour + ":" + min + ":" + sec + "] "
-                            + "OK (temp)" + "\n";
-            res = "OK";
+                            + res + "\n";
+            //res = "OK";
         }
         
         reproduceVoz(res);
@@ -711,8 +717,14 @@ public class Chat extends javax.swing.JFrame {
 
     private void cbDominioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbDominioActionPerformed
         // TODO add your handling code here:
-        if(bandera)
+        if(!bandera) {
             JOptionPane.showMessageDialog(null, "Se ha cambiado el dominio a " + cbDominio.getSelectedItem());
+            temaOntologia = cbDominio.getSelectedItem().toString();
+            System.out.println("Este es el tema:" + temaOntologia);
+            
+            
+        }
+        
     }//GEN-LAST:event_cbDominioActionPerformed
 
     private void cbDominioItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbDominioItemStateChanged
