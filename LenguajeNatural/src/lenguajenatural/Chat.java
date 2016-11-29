@@ -33,6 +33,9 @@ import org.antlr.v4.runtime.RecognitionException;
 import com.sun.speech.freetts.Voice;
 import com.sun.speech.freetts.VoiceManager;
 import java.awt.Color;
+import java.util.ArrayList;
+import static java.util.Collections.list;
+import java.util.ListIterator;
 //import Gramatica.*;
 
 
@@ -54,7 +57,7 @@ public class Chat extends javax.swing.JFrame {
     private String vozNombre;
     private String temaOntologia = "Francia";
     
-    public Chat() {
+    public Chat() throws BadLocationException, InterruptedException {
         initComponents();
         txtMsg.setRows(2);
         txtMsg.setColumns(10);
@@ -75,6 +78,16 @@ public class Chat extends javax.swing.JFrame {
         sco.setSuggestionsLimitMenu(10);
         JPopupMenu popup = SpellChecker.createCheckerPopup(sco);
         txtMsg.addMouseListener(new PopupListener(popup));
+        
+        String mensaje = "Hola! Mi nombre es OntoBot!";
+        this.mensajeInicio(mensaje);
+        mensaje = "Estoy aquí para ayudarte";
+        this.mensajeInicio2(mensaje);
+        mensaje = "Para iniciar selecciona un tema";
+        this.mensajeInicio2(mensaje);
+        mensaje = "Se encuentran de tu lado derecho";
+        this.mensajeInicio2(mensaje);
+        
     }
 
     /**
@@ -204,7 +217,7 @@ public class Chat extends javax.swing.JFrame {
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Dominio"));
 
-        cbDominio.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Francia", "Ferrari", "Bill Gates", "Python" }));
+        cbDominio.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione...", "Apple", "Batman", "Cristiano Ronaldo", "Ferrari", "Francia", "Python", "Steve Jobs" }));
         cbDominio.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 cbDominioItemStateChanged(evt);
@@ -373,7 +386,7 @@ public class Chat extends javax.swing.JFrame {
                     .addComponent(jPanel5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(0, 18, Short.MAX_VALUE))
+                .addGap(0, 12, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -511,30 +524,99 @@ public class Chat extends javax.swing.JFrame {
         return respuesta;
     }
     
-    private void GeneraRespuesta(String pregunta) throws BadLocationException, IOException {
+    private void mensajeInicio(String mensaje) throws BadLocationException {
         int hour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY);
         int min = Calendar.getInstance().get(Calendar.MINUTE);
         int sec = Calendar.getInstance().get(Calendar.SECOND);
         
         String respuesta;
+        String res = mensaje;        
+        
+        
+            respuesta = "[OntoBot][" + hour + ":" + min + ":" + sec + "] "
+                            + res + "\n";
+        
+        
+        //reproduceVoz(res);
+        
+        StyledDocument doc = txtChat.getStyledDocument();
+        int length = doc.getLength();
+        SimpleAttributeSet attrsResp = new SimpleAttributeSet();
+        StyleConstants.setForeground(attrsResp, Color.RED);
+        StyleConstants.setBold(attrsResp, false);
+        StyleConstants.setAlignment(attrsResp, StyleConstants.ALIGN_RIGHT);
+        StyleConstants.setFontSize(attrsResp, fontSize);
+        doc.insertString(doc.getLength(), respuesta, null);
+        doc.setParagraphAttributes(length+1, 1, attrsResp, false);
+    }
+    
+    private void mensajeInicio2(String mensaje) throws BadLocationException {
+        int hour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY);
+        int min = Calendar.getInstance().get(Calendar.MINUTE);
+        int sec = Calendar.getInstance().get(Calendar.SECOND);
+        
+        String respuesta;
+        String res = mensaje;        
+        
+        
+            respuesta = res + "\n";
+        
+        
+        //reproduceVoz(res);
+        
+        StyledDocument doc = txtChat.getStyledDocument();
+        int length = doc.getLength();
+        SimpleAttributeSet attrsResp = new SimpleAttributeSet();
+        StyleConstants.setForeground(attrsResp, Color.RED);
+        StyleConstants.setBold(attrsResp, false);
+        StyleConstants.setAlignment(attrsResp, StyleConstants.ALIGN_RIGHT);
+        StyleConstants.setFontSize(attrsResp, fontSize);
+        doc.insertString(doc.getLength(), respuesta, null);
+        doc.setParagraphAttributes(length+1, 1, attrsResp, false);
+    }
+    
+    private void GeneraRespuesta(String pregunta) throws BadLocationException, IOException {
+        int hour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY);
+        int min = Calendar.getInstance().get(Calendar.MINUTE);
+        int sec = Calendar.getInstance().get(Calendar.SECOND);
+        
+        String respuesta = "";
         String res = "";
-        res = this.hacePregunta(pregunta);
+        ConsultaOntologia con;
+        System.out.println("Pregunta: " + pregunta);
+        if(bandera == true){
+            if("ayuda".equals(pregunta))
+            {
+                System.out.println("ayudaaaaaaaaaaaa");
+                con = new ConsultaOntologia();
+                con.getTodasPropiedades(temaOntologia);
+                res = con.getListaPropiedades();                
+                respuesta = res;
+                
+            } else {
+                res = this.hacePregunta(pregunta);
         
-        ConsultaOntologia con = new ConsultaOntologia(temaOntologia,pregunta);
-        res = con.getResultado().trim();
-        System.out.println("*" + res + "*" + res.length());
-        
-        
-        if(res.length() > 0) {
-            respuesta = "[OntoBot][" + hour + ":" + min + ":" + sec + "] "
-                            + res + "\n";
+                con = new ConsultaOntologia(temaOntologia,pregunta);
+                res = con.getResultado().trim();
+                res = res.replace("\n",",");
+                System.out.println("*" + res + "*" + res.length());
+
+                if(res.length() > 0) {
+                    respuesta = "[OntoBot][" + hour + ":" + min + ":" + sec + "] "
+                                    + res + "\n";
+                } else {
+                    res = "Lo siento, no poseo esa información";
+                    respuesta = "[OntoBot][" + hour + ":" + min + ":" + sec + "] "
+                                    + res + "\n";
+                }
+            }
+            
         } else {
-            res = "Lo siento, no poseo esa información";
+            res = "Primero debes seleccionar un tema";
             respuesta = "[OntoBot][" + hour + ":" + min + ":" + sec + "] "
-                            + res + "\n";
-            //res = "OK";
+                                + res + "\n";
         }
-        
+                
         reproduceVoz(res);
         
         StyledDocument doc = txtChat.getStyledDocument();
@@ -720,14 +802,20 @@ public class Chat extends javax.swing.JFrame {
 
     private void cbDominioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbDominioActionPerformed
         // TODO add your handling code here:
-        if(!bandera) {
-            JOptionPane.showMessageDialog(null, "Se ha cambiado el dominio a " + cbDominio.getSelectedItem());
+        if(cbDominio.getSelectedIndex() == 0) {
+            bandera = false;
+        } else {
+            //JOptionPane.showMessageDialog(null, "Se ha cambiado el dominio a " + cbDominio.getSelectedItem());
             temaOntologia = cbDominio.getSelectedItem().toString();
             System.out.println("Este es el tema:" + temaOntologia);
-            
-            
-        }
-        
+            try {
+                this.mensajeInicio("Muy bien! Haz cambiado el tema a " + temaOntologia);
+                this.mensajeInicio2("Qué te gustaría saber? (TIP: Puedes escribir *ayuda*)");
+                bandera = true;
+            } catch (BadLocationException ex) {
+                Logger.getLogger(Chat.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } 
     }//GEN-LAST:event_cbDominioActionPerformed
 
     private void cbDominioItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbDominioItemStateChanged
@@ -784,7 +872,13 @@ public class Chat extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Chat().setVisible(true);
+                try {
+                    new Chat().setVisible(true);
+                } catch (BadLocationException ex) {
+                    Logger.getLogger(Chat.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(Chat.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }

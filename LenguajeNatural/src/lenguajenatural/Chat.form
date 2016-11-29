@@ -101,7 +101,7 @@
                   <Component id="jPanel4" alignment="0" max="32767" attributes="0"/>
                   <Component id="jPanel1" max="32767" attributes="0"/>
               </Group>
-              <EmptySpace min="0" pref="18" max="32767" attributes="0"/>
+              <EmptySpace min="0" pref="12" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -237,11 +237,15 @@
         <Component class="javax.swing.JComboBox" name="cbDominio">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="4">
-                <StringItem index="0" value="Francia"/>
-                <StringItem index="1" value="Ferrari"/>
-                <StringItem index="2" value="Bill Gates"/>
-                <StringItem index="3" value="Python"/>
+              <StringArray count="8">
+                <StringItem index="0" value="Seleccione..."/>
+                <StringItem index="1" value="Apple"/>
+                <StringItem index="2" value="Batman"/>
+                <StringItem index="3" value="Cristiano Ronaldo"/>
+                <StringItem index="4" value="Ferrari"/>
+                <StringItem index="5" value="Francia"/>
+                <StringItem index="6" value="Python"/>
+                <StringItem index="7" value="Steve Jobs"/>
               </StringArray>
             </Property>
           </Properties>
