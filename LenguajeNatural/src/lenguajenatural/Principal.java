@@ -70,7 +70,7 @@ public class Principal extends javax.swing.JFrame
 
         lblTitulo.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         lblTitulo.setForeground(new java.awt.Color(255, 255, 255));
-        lblTitulo.setText("Sistema de Voz en Lenguaje Natural Basado en Ontologias");
+        lblTitulo.setText("Sistema Interactivo en Lenguaje Natural Basado en Ontologias");
 
         btnIniciar.setText("Iniciar");
         btnIniciar.addActionListener(new java.awt.event.ActionListener() {
