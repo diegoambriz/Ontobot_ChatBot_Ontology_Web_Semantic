@@ -14,6 +14,8 @@ import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.RecognitionException;
 
 import UpperEssential.UpperEssentialLookAndFeel;
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
@@ -28,6 +30,8 @@ public class Principal extends javax.swing.JFrame
     public Principal() 
     {
         initComponents(); 
+        Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+        this.setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2);
     }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -191,6 +195,16 @@ public class Principal extends javax.swing.JFrame
         menuPrincipal.add(menuAdmin);
 
         menuAbout.setText("Acerca de");
+        menuAbout.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                menuAboutMouseClicked(evt);
+            }
+        });
+        menuAbout.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuAboutActionPerformed(evt);
+            }
+        });
         menuPrincipal.add(menuAbout);
 
         setJMenuBar(menuPrincipal);
@@ -304,6 +318,17 @@ public class Principal extends javax.swing.JFrame
         // TODO add your handling code here:
         gram = 'c';
     }//GEN-LAST:event_jMenuItem3ActionPerformed
+
+    private void menuAboutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuAboutActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_menuAboutActionPerformed
+
+    private void menuAboutMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuAboutMouseClicked
+        // TODO add your handling code here:
+        AcercaDe d = new AcercaDe();
+        d.setVisible(true);
+    }//GEN-LAST:event_menuAboutMouseClicked
 
     private void generaAnalizadores() throws InterruptedException {
         try {

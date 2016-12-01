@@ -34,6 +34,8 @@ import org.antlr.v4.runtime.RecognitionException;
 import com.sun.speech.freetts.Voice;
 import com.sun.speech.freetts.VoiceManager;
 import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.util.ArrayList;
 import static java.util.Collections.list;
 import java.util.ListIterator;
@@ -70,6 +72,8 @@ public class Chat extends javax.swing.JFrame {
         bandera = false;
         vozNombre = "mbrola_us1";
         cargaDominios();
+        Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+        this.setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2);
         //gramatica = '';//default
         
         SpellChecker.setUserDictionaryProvider(new FileUserDictionary());      
@@ -115,10 +119,8 @@ public class Chat extends javax.swing.JFrame {
         cbDominio = new javax.swing.JComboBox<>();
         jPanel2 = new javax.swing.JPanel();
         jSpinner1 = new javax.swing.JSpinner();
-        jPanel4 = new javax.swing.JPanel();
-        sldVolumen = new javax.swing.JSlider();
-        jPanel5 = new javax.swing.JPanel();
-        cbTipoVoz = new javax.swing.JComboBox<>();
+        jPanel10 = new javax.swing.JPanel();
+        cbTipoVoz3 = new javax.swing.JComboBox<>();
         jPanel6 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         txtChat = new javax.swing.JTextPane();
@@ -126,6 +128,7 @@ public class Chat extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         txtMsg = new javax.swing.JTextArea();
         btnEnviar = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
         jScrollPane1.setViewportView(jTextPane2);
 
@@ -274,51 +277,33 @@ public class Chat extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder("Volumen"));
+        jPanel10.setBorder(javax.swing.BorderFactory.createTitledBorder("Tipo de Voz"));
 
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(sldVolumen, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(sldVolumen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
-
-        jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder("Tipo de Voz"));
-
-        cbTipoVoz.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Mujer", "Hombre 1", "Hombre 2" }));
-        cbTipoVoz.addItemListener(new java.awt.event.ItemListener() {
+        cbTipoVoz3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Mujer", "Hombre 1", "Hombre 2" }));
+        cbTipoVoz3.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 cbTipoVozItemStateChanged(evt);
             }
         });
-        cbTipoVoz.addActionListener(new java.awt.event.ActionListener() {
+        cbTipoVoz3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbTipoVozActionPerformed(evt);
             }
         });
 
-        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
-        jPanel5.setLayout(jPanel5Layout);
-        jPanel5Layout.setHorizontalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+        javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
+        jPanel10.setLayout(jPanel10Layout);
+        jPanel10Layout.setHorizontalGroup(
+            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel10Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(cbTipoVoz, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(cbTipoVoz3, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
-        jPanel5Layout.setVerticalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addComponent(cbTipoVoz, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        jPanel10Layout.setVerticalGroup(
+            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel10Layout.createSequentialGroup()
+                .addComponent(cbTipoVoz3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -335,7 +320,7 @@ public class Chat extends javax.swing.JFrame {
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING)
+            .addComponent(jScrollPane3)
         );
 
         jPanel7.setBorder(javax.swing.BorderFactory.createTitledBorder("Mensaje"));
@@ -364,9 +349,9 @@ public class Chat extends javax.swing.JFrame {
         jPanel7Layout.setHorizontalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel7Layout.createSequentialGroup()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 310, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 349, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnEnviar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnEnviar, javax.swing.GroupLayout.DEFAULT_SIZE, 107, Short.MAX_VALUE)
                 .addGap(0, 0, 0))
         );
         jPanel7Layout.setVerticalGroup(
@@ -374,8 +359,10 @@ public class Chat extends javax.swing.JFrame {
             .addGroup(jPanel7Layout.createSequentialGroup()
                 .addComponent(btnEnviar)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 107, Short.MAX_VALUE)
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 108, Short.MAX_VALUE)
         );
+
+        jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\diego\\Downloads\\OntoBot Logos\\OntoBot Logos\\logo-s-color-nombre.png")); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -386,14 +373,23 @@ public class Chat extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(12, 12, 12))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGap(12, 12, 12))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(jPanel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addContainerGap())))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(42, 42, 42)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(43, 43, 43))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -404,39 +400,19 @@ public class Chat extends javax.swing.JFrame {
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jPanel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void txtMsgKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtMsgKeyPressed
-        int key = evt.getKeyCode();
-                
-        if(key == java.awt.event.KeyEvent.VK_ENTER)
-            try {
-                    if(txtMsg.getText().length()!=0)
-                {
-                    this.addString();
-                }
-                else
-                {
-                    JOptionPane.showMessageDialog(null, "No se puede enviar un Mensaje Vacio");
-                }
-        } catch (BadLocationException | IOException ex) {
-            Logger.getLogger(Chat.class.getName()).log(Level.SEVERE, null, ex);
-        }           
-    }//GEN-LAST:event_txtMsgKeyPressed
 
     private void cargaDominios(){
         //cbDominio.removeAllItems();
@@ -454,14 +430,6 @@ public class Chat extends javax.swing.JFrame {
         bandera = true;*/
     }
     
-    private void txtMsgKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtMsgKeyReleased
-        // TODO add your handling code here:
-         int key = evt.getKeyCode();
-         
-         if(key == java.awt.event.KeyEvent.VK_ENTER)
-             txtMsg.setText(null); 
-    }//GEN-LAST:event_txtMsgKeyReleased
-
     private void addString() throws BadLocationException, IOException {
         int hour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY);
         int min = Calendar.getInstance().get(Calendar.MINUTE);
@@ -663,127 +631,6 @@ public class Chat extends javax.swing.JFrame {
         freettsVoice.speak(words);
     }
     
-    private void btnEnviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnviarActionPerformed
-        try
-        {
-            if(txtMsg.getText().length()!=0)
-            {
-                this.addString();
-            }
-            else
-            {
-                JOptionPane.showMessageDialog(null, "No se puede enviar un Mensaje Vacio");
-            }
-        } 
-        catch (BadLocationException | IOException ex)
-        {
-            Logger.getLogger(Chat.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-    }//GEN-LAST:event_btnEnviarActionPerformed
-
-    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-        // TODO add your handling code here:
-        if(txtChat.getText().length()!=0)
-        {
-            javax.swing.JFileChooser fileChooser = new javax.swing.JFileChooser();
-        
-            String[] opciones = {"Completo", "Parcial", "Cancelar" };
-
-            int opcion = JOptionPane.showOptionDialog(
-                                   null                             //componente
-                                 , "¿Cómo desea guardar la conversación?"            // Mensaje
-                                 , "Guardar conversación"         // Titulo en la barra del cuadro
-                                 , JOptionPane.DEFAULT_OPTION       // Tipo de opciones
-                                 , JOptionPane.INFORMATION_MESSAGE  // Tipo de mensaje (icono)
-                                 , null                             // Icono (ninguno)
-                                 , opciones                         // Opciones personalizadas
-                                 , null                             // Opcion por defecto
-                               );
-            switch(opcion) {
-                case 0:
-                    if (fileChooser.showSaveDialog(null) == javax.swing.JFileChooser.APPROVE_OPTION) {
-                        java.io.File file = fileChooser.getSelectedFile();
-                        try {
-                            try (java.io.FileWriter fileWriter = new java.io.FileWriter(file)) {
-                                fileWriter.write(txtChat.getText());
-                            }
-                        } catch (IOException ex) {
-                            Logger.getLogger(Chat.class.getName()).log(Level.SEVERE, null, ex);
-                        }
-                    }
-                    break;
-                case 1:
-                    GuardaParcial parcial = new GuardaParcial();
-                    try {
-                        parcial.setHistorial(txtChat.getText());
-                    } catch (BadLocationException ex) {
-                        Logger.getLogger(Chat.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                    parcial.setVisible(true);
-                    String text = parcial.getHistorial();
-                case 2:
-                    break;
-            }
-
-        }
-        else
-        {
-            JOptionPane.showMessageDialog(null, "No se puede Guardar una Conversacion Vacia");
-        }
-    }//GEN-LAST:event_btnGuardarActionPerformed
-
-    private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
-        
-        if(txtChat.getText().length()!= 0)
-        {
-            String mensaje = "Estas seguro que deseas volver al menu Principal";
-            String titulo = "Volver al menu Principal";
-      
-            int respuesta = JOptionPane.showConfirmDialog(null, mensaje, titulo, JOptionPane.YES_NO_OPTION);
-            if (respuesta == JOptionPane.YES_OPTION)
-            {
-                Principal p = new Principal();
-                this.setVisible(false);
-                p.setVisible(true);
-            }
-        }
-        else
-        {
-            Principal p = new Principal();
-            this.setVisible(false);
-            p.setVisible(true);
-        }
-    }//GEN-LAST:event_btnVolverActionPerformed
-
-    private void btnBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBorrarActionPerformed
-        
-        if(txtChat.getText().length() != 0)
-        {
-            String mensaje = "Estas seguro que deseas Borrar el Historial de Conversacion?";
-        String titulo = "Borrar Historial";
-        int respuesta = JOptionPane.showConfirmDialog(null, mensaje, titulo, JOptionPane.YES_NO_OPTION);
-        
-        if (respuesta == JOptionPane.YES_OPTION)
-        {
-            txtChat.setText("");
-        }
-        }
-        
-        
-    }//GEN-LAST:event_btnBorrarActionPerformed
-
-    private void jSpinner1StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSpinner1StateChanged
-        // TODO add your handling code here:
-        fontSize = (int)jSpinner1.getValue();
-        StyledDocument doc = txtChat.getStyledDocument();
-        SimpleAttributeSet attrs = new SimpleAttributeSet();
-        int length = doc.getLength();
-        StyleConstants.setFontSize(attrs, fontSize);
-        
-        doc.setParagraphAttributes(0, length, attrs, false);
-    }//GEN-LAST:event_jSpinner1StateChanged
-
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         if(txtChat.getText().length()!= 0)
         {
@@ -821,7 +668,7 @@ public class Chat extends javax.swing.JFrame {
             } catch (BadLocationException ex) {
                 Logger.getLogger(Chat.class.getName()).log(Level.SEVERE, null, ex);
             }
-        } 
+        }
     }//GEN-LAST:event_cbDominioActionPerformed
 
     private void cbDominioItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbDominioItemStateChanged
@@ -829,18 +676,162 @@ public class Chat extends javax.swing.JFrame {
         //JOptionPane.showMessageDialog(null, "Se ha cambiado el dominio a " + cbDominio.getSelectedItem());
     }//GEN-LAST:event_cbDominioItemStateChanged
 
+    private void jSpinner1StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSpinner1StateChanged
+        // TODO add your handling code here:
+        fontSize = (int)jSpinner1.getValue();
+        StyledDocument doc = txtChat.getStyledDocument();
+        SimpleAttributeSet attrs = new SimpleAttributeSet();
+        int length = doc.getLength();
+        StyleConstants.setFontSize(attrs, fontSize);
+
+        doc.setParagraphAttributes(0, length, attrs, false);
+    }//GEN-LAST:event_jSpinner1StateChanged
+
+    private void btnBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBorrarActionPerformed
+
+        if(txtChat.getText().length() != 0)
+        {
+            String mensaje = "Estas seguro que deseas Borrar el Historial de Conversacion?";
+            String titulo = "Borrar Historial";
+            int respuesta = JOptionPane.showConfirmDialog(null, mensaje, titulo, JOptionPane.YES_NO_OPTION);
+
+            if (respuesta == JOptionPane.YES_OPTION)
+            {
+                txtChat.setText("");
+            }
+        }
+    }//GEN-LAST:event_btnBorrarActionPerformed
+
+    private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
+
+        if(txtChat.getText().length()!= 0)
+        {
+            String mensaje = "Estas seguro que deseas volver al menu Principal";
+            String titulo = "Volver al menu Principal";
+
+            int respuesta = JOptionPane.showConfirmDialog(null, mensaje, titulo, JOptionPane.YES_NO_OPTION);
+            if (respuesta == JOptionPane.YES_OPTION)
+            {
+                Principal p = new Principal();
+                this.setVisible(false);
+                p.setVisible(true);
+            }
+        }
+        else
+        {
+            Principal p = new Principal();
+            this.setVisible(false);
+            p.setVisible(true);
+        }
+    }//GEN-LAST:event_btnVolverActionPerformed
+
+    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
+        // TODO add your handling code here:
+        if(txtChat.getText().length()!=0)
+        {
+            javax.swing.JFileChooser fileChooser = new javax.swing.JFileChooser();
+
+            String[] opciones = {"Completo", "Parcial", "Cancelar" };
+
+            int opcion = JOptionPane.showOptionDialog(
+                null                             //componente
+                , "¿Cómo desea guardar la conversación?"            // Mensaje
+                , "Guardar conversación"         // Titulo en la barra del cuadro
+                , JOptionPane.DEFAULT_OPTION       // Tipo de opciones
+                , JOptionPane.INFORMATION_MESSAGE  // Tipo de mensaje (icono)
+                , null                             // Icono (ninguno)
+                , opciones                         // Opciones personalizadas
+                , null                             // Opcion por defecto
+            );
+            switch(opcion) {
+                case 0:
+                if (fileChooser.showSaveDialog(null) == javax.swing.JFileChooser.APPROVE_OPTION) {
+                    java.io.File file = fileChooser.getSelectedFile();
+                    try {
+                        try (java.io.FileWriter fileWriter = new java.io.FileWriter(file)) {
+                            fileWriter.write(txtChat.getText());
+                        }
+                    } catch (IOException ex) {
+                        Logger.getLogger(Chat.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+                break;
+                case 1:
+                GuardaParcial parcial = new GuardaParcial();
+                try {
+                    parcial.setHistorial(txtChat.getText());
+                } catch (BadLocationException ex) {
+                    Logger.getLogger(Chat.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                parcial.setVisible(true);
+                String text = parcial.getHistorial();
+                case 2:
+                break;
+            }
+
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(null, "No se puede Guardar una Conversacion Vacia");
+        }
+    }//GEN-LAST:event_btnGuardarActionPerformed
+
+    private void btnEnviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnviarActionPerformed
+        try
+        {
+            if(txtMsg.getText().length()!=0)
+            {
+                this.addString();
+            }
+            else
+            {
+                JOptionPane.showMessageDialog(null, "No se puede enviar un Mensaje Vacio");
+            }
+        }
+        catch (BadLocationException | IOException ex)
+        {
+            Logger.getLogger(Chat.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btnEnviarActionPerformed
+
+    private void txtMsgKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtMsgKeyReleased
+        // TODO add your handling code here:
+        int key = evt.getKeyCode();
+
+        if(key == java.awt.event.KeyEvent.VK_ENTER)
+        txtMsg.setText(null);
+    }//GEN-LAST:event_txtMsgKeyReleased
+
+    private void txtMsgKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtMsgKeyPressed
+        int key = evt.getKeyCode();
+
+        if(key == java.awt.event.KeyEvent.VK_ENTER)
+        try {
+            if(txtMsg.getText().length()!=0)
+            {
+                this.addString();
+            }
+            else
+            {
+                JOptionPane.showMessageDialog(null, "No se puede enviar un Mensaje Vacio");
+            }
+        } catch (BadLocationException | IOException ex) {
+            Logger.getLogger(Chat.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_txtMsgKeyPressed
+
     private void cbTipoVozActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbTipoVozActionPerformed
         // TODO add your handling code here:
         switch(cbTipoVoz.getSelectedIndex()){
             case 0:
-                vozNombre = "mbrola_us1";
-                break;
+            vozNombre = "mbrola_us1";
+            break;
             case 1:
-                vozNombre = "mbrola_us2";
-                break;
+            vozNombre = "mbrola_us2";
+            break;
             case 2:
-                vozNombre = "mbrola_us3";
-                break;
+            vozNombre = "mbrola_us3";
+            break;
         }
     }//GEN-LAST:event_cbTipoVozActionPerformed
 
@@ -892,22 +883,27 @@ public class Chat extends javax.swing.JFrame {
     private javax.swing.JButton btnVolver;
     private javax.swing.JComboBox<String> cbDominio;
     private javax.swing.JComboBox<String> cbTipoVoz;
+    private javax.swing.JComboBox<String> cbTipoVoz1;
+    private javax.swing.JComboBox<String> cbTipoVoz2;
+    private javax.swing.JComboBox<String> cbTipoVoz3;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JDialog jDialog1;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
+    private javax.swing.JPanel jPanel8;
+    private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JSpinner jSpinner1;
     private javax.swing.JTextPane jTextPane2;
-    private javax.swing.JSlider sldVolumen;
     private javax.swing.JTextPane txtChat;
     private javax.swing.JTextArea txtMsg;
     // End of variables declaration//GEN-END:variables
