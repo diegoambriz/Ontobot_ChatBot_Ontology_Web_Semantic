@@ -11,7 +11,7 @@
     <description>Builds, tests, and runs the project LenguajeNatural.</description>
     <import file="nbproject/build-impl.xml"/>
     
-    <target name="-pre-compile" depends="antlr">
+    <!--<target name="-pre-compile" depends="antlr">
     </target>
     
     <target name="init-antlr">
@@ -24,7 +24,7 @@
             <arg value="${antlr.grammar}"/>
             <classpath path="${antlr.jar}"/>
         </java>
-    </target>
+    </target>-->
     <!--
 
     There exist several targets which are by default empty and which can be 
