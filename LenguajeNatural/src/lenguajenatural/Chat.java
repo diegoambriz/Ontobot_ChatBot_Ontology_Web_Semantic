@@ -8,7 +8,6 @@
 
 package lenguajenatural;
 
-import UpperEssential.UpperEssentialLookAndFeel;
 import com.inet.jortho.FileUserDictionary;
 import com.inet.jortho.PopupListener;
 import com.inet.jortho.SpellChecker;

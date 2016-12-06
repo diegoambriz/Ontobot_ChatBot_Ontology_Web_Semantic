@@ -2,3 +2,5 @@ Nino
 holo
 Quienes
 Batman
+Steve
+Jobs

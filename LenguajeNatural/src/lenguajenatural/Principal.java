@@ -13,7 +13,6 @@ import org.antlr.v4.runtime.ANTLRInputStream;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.RecognitionException;
 
-import UpperEssential.UpperEssentialLookAndFeel;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import javax.swing.UIManager;

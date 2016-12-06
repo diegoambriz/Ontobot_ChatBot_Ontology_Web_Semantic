@@ -1,6 +1,4 @@
-package lenguajenatural;
-
-// Generated from C:\Users\Basu\Documents\NetBeansProjects\lenguajenatural\LenguajeNatural\src\lenguajenatural\Gramatica.g4 by ANTLR 4.5.3
+// Generated from C:\Users\diego\Desktop\Tareas Semestre 2016_2017_I\Proyecto Integrador\lenguajenatural\LenguajeNatural\src\lenguajenatural\Gramatica.g4 by ANTLR 4.5.3
 import org.antlr.v4.runtime.atn.*;
 import org.antlr.v4.runtime.dfa.DFA;
 import org.antlr.v4.runtime.*;

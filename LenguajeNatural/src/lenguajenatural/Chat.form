@@ -463,11 +463,6 @@
       </SubComponents>
     </Container>
     <Component class="javax.swing.JLabel" name="jLabel1">
-      <Properties>
-        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="2" name="C:\Users\diego\Downloads\OntoBot Logos\OntoBot Logos\logo-s-color-nombre.png"/>
-        </Property>
-      </Properties>
     </Component>
   </SubComponents>
 </Form>
